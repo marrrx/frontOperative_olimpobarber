@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { PageAuth } from "./PageAuth";
+import { Login } from "./components/Login";
 
 export const RoutesAuth = () => {
     const token = localStorage.getItem('token');
@@ -9,7 +10,7 @@ export const RoutesAuth = () => {
     return (
         <Routes>
             <Route path='/*' element={<PageAuth />}>
-                <Route path="" element={<></>} />
+                <Route path="" element={<Login/>} />
             </Route>
             <Route path='/*' element={<Navigate to={'../'} replace />} />
         </Routes>
