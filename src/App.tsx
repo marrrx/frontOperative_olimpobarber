@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { RoutesAuth } from './general/components/auth/RoutesAuth';
+import { Page404 } from './views/Page404';
 
-function App() {
+export const App = () => {
+  const basename = process.env.REACT_APP_BASE_NAME;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <ToastContainer position="top-right" theme='colored' />
+      <BrowserRouter basename={basename}>
+        <Routes>
+          <Route path='/' element={<Navigate to="login" />} />
+          <Route path='/home' element={<></>}>
+            <Route index element={<></>} />
+          </Route>
+          <Route path='login/*' element={<RoutesAuth />} />
+          <Route path='/*' element={<Page404 />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  )
 }
-
-export default App;
