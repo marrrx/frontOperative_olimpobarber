@@ -2,7 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { RoutesAuth } from './general/components/auth/RoutesAuth';
+import './styles/GeneralStyles.css';
+import { RoutesAuth } from './modules/auth/RoutesAuth';
 import { Page404 } from './views/Page404';
 
 export const App = () => {

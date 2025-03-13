@@ -1,0 +1,43 @@
+
+
+
+.loginBackground {
+  min-height: 100dvh;
+}
+.loginTitle {
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.loginFormCard {
+  width: 90%;
+  border: solid;
+  border-width: 0.1px;
+  border-color: grey;
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+}
+.loginForgetPassword {
+  text-decoration: none;
+  color: black;
+}
+@media (max-width: 992px) {
+  .loginFormCard {
+    font-size: medium;
+    padding: 0;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    box-shadow: none !important;
+  }
+  .loginForgetPassword {
+    color: black;
+    font-weight: 300;
+  }
+}
+
+
+body {
+  overflow: hidden;
+}

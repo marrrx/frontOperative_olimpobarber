@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ILogin } from "../../../interfaces/Login.model";
+import { ILogin } from "../interfaces/Login.model";
 
 const API = process.env.REACT_APP_API;
 const endPoint = 'authenticate/';
