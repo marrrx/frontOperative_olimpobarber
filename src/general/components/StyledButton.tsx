@@ -15,11 +15,11 @@ interface StyledButtonProps {
     &:hover {
       background-color: #eab308;
       color: black;
+      
     }
     &:active{
       background-color: #eab308;
       color: black;
-      
     }
   `;
   
