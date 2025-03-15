@@ -5,10 +5,18 @@
   border-radius: 50%;
   font-weight: bold;
 }
+.active{
+  background-color: #eab308;
+  transition: background-color 0.4s ease-in-out;
+  
+
+}
+.inactive{
+  background-color: #d1d5db;
+}
 .spacer {
   width: 250px;
   height: 5px;
-  background-color: #d1d5db;
 }
 .label_step {
   font-size: smaller;

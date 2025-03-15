@@ -10,7 +10,7 @@ export const SelectBranch = () => {
   return (
     <div className="mx-3 mt-4">
       <h5>Selecciona sucursal</h5>
-      <div className="d-flex flex-column flex-sm-row">
+      <div className="d-flex flex-column flex-lg-row">
         <CardBranches branches={branchesData} />
       </div>
     </div>
