@@ -4,15 +4,21 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { App } from "./App";
 import { CitasFormProvider } from "./general/contexts/CitasFormContext/CitasFormContext";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import "dayjs/locale/es"; 
+
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <CitasFormProvider>
-      <App />
-    </CitasFormProvider>
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
+      <CitasFormProvider>
+        <App />
+      </CitasFormProvider>
+    </LocalizationProvider>
   </React.StrictMode>
 );
 

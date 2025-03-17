@@ -30,7 +30,7 @@
   }
 }
 .customContainer {
-  background-image: url("/Applications/MAMP/htdocs/REACT/Citas/src/assets/sillas.jpg");
+  background-image: url("https://raw.githubusercontent.com/marrrx/Imagenes/refs/heads/main/images/sillas.jpg");
   background-size: cover;
   min-height: 100vh;
 }
@@ -52,5 +52,16 @@
     padding: 10px;
     margin-bottom: 20px;
     padding-top: 0;
+  }
+}
+
+.cardService{
+  width: 30%;
+}
+@media (max-width: 768px) {
+  .cardService {
+    flex: auto;
+    width: 100%;
+
   }
 }

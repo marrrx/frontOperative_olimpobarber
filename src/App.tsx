@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./styles/GeneralStyles.css";
 import { RoutesAuth } from "./modules/auth/RoutesAuth";
 import { Page404 } from "./views/Page404";
-import { PageSchedule } from "./modules/schedule/PageSchedule";
 import { RoutesSchedule } from "./modules/schedule/RoutesSchedule";
 
 export const App = () => {

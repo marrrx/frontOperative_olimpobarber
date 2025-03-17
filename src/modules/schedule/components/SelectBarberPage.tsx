@@ -24,6 +24,7 @@ export const SelectBarberPage = () => {
         <CardBarber barbers={barbersData} />
       </div>
       <StyledButton
+      className="mt-3"
         as={Button}
         onClick={() => {
           handleGoBack();

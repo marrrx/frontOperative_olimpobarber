@@ -3,21 +3,21 @@
     {
       "id": 1,
       "nombre": "Oscar López",
-      "avatar": "/Applications/MAMP/htdocs/REACT/Citas/src/assets/sillas.jpg",
+      "avatar": "https://raw.githubusercontent.com/marrrx/Imagenes/refs/heads/main/images/236D56EF-4036-4C9E-8BD5-071E2EB9303A_1_102_o.jpeg",
       "direccion": "Teodoro Olivares Sur 303 B, Industrial",
       "horario": "10:00 - 19:00"
     },
     {
       "id": 2,
       "nombre": "Aaron Escobedo",
-      "avatar": "/Applications/MAMP/htdocs/REACT/Citas/src/assets/sillas.jpg",
+      "avatar": "https://raw.githubusercontent.com/marrrx/Imagenes/refs/heads/main/images/236D56EF-4036-4C9E-8BD5-071E2EB9303A_1_102_o.jpeg",
       "direccion": "Calle Felipe Ángeles #524, Colonia Cosmos 1",
       "horario": "10:00 - 19:00"
     },
     {
       "id": 3,
       "nombre": "Odalis Reyes",
-      "avatar": "/Applications/MAMP/htdocs/REACT/Citas/src/assets/sillas.jpg",
+      "avatar": "https://raw.githubusercontent.com/marrrx/Imagenes/refs/heads/main/images/236D56EF-4036-4C9E-8BD5-071E2EB9303A_1_102_o.jpeg",
       "direccion": "Av. Revolución #45. Col. 5 de Mayo",
       "horario": "10:00 - 19:00"
     }
