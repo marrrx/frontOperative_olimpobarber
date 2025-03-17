@@ -21,5 +21,6 @@ interface StyledButtonProps {
       background-color: #eab308;
       color: black;
     }
+    
   `;
   

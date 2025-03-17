@@ -1,5 +1,3 @@
-import React, { useContext } from "react";
-import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { StepsBar } from "./components/StepsBar";
 import "./styles/styles.css";

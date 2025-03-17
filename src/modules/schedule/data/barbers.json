@@ -1,20 +1,23 @@
 {
-  "branches": [
+  "barbers": [
     {
       "id": 1,
-      "nombre": "Sucursal 1",
+      "nombre": "Oscar López",
+      "avatar": "/Applications/MAMP/htdocs/REACT/Citas/src/assets/sillas.jpg",
       "direccion": "Teodoro Olivares Sur 303 B, Industrial",
       "horario": "10:00 - 19:00"
     },
     {
       "id": 2,
-      "nombre": "Sucursal 2",
+      "nombre": "Aaron Escobedo",
+      "avatar": "/Applications/MAMP/htdocs/REACT/Citas/src/assets/sillas.jpg",
       "direccion": "Calle Felipe Ángeles #524, Colonia Cosmos 1",
       "horario": "10:00 - 19:00"
     },
     {
       "id": 3,
-      "nombre": "Sucursal 3",
+      "nombre": "Odalis Reyes",
+      "avatar": "/Applications/MAMP/htdocs/REACT/Citas/src/assets/sillas.jpg",
       "direccion": "Av. Revolución #45. Col. 5 de Mayo",
       "horario": "10:00 - 19:00"
     }

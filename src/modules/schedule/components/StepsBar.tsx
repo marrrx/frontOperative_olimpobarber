@@ -15,11 +15,11 @@ export const StepsBar = () => {
 
   return (
     <>
-      <div className="d-flex justify-content-center align-items-center ">
+      <div className="d-flex justify-content-center my-3 align-items-center ">
         {steps?.map((step, i) => (
           <React.Fragment key={i}>
             <div
-              className="text-center mt-lg-5 me-3 ms-3 d-flex flex-column align-items-center"
+              className="text-center w-25 mt-lg-4 me-3 ms-3 d-flex flex-column justify-content-center align-items-center"
               key={i}
             >
               <div
@@ -29,12 +29,16 @@ export const StepsBar = () => {
               >
                 {i + 1}
               </div>
-              <p className="d-none d-md-block label_step">{step}</p>
+              <div>
+                <p className="d-none d-md-block label_step">{step}</p>
+              </div>
             </div>
             {i < steps.length - 1 && (
-              <div className={`spacer d-none d-lg-block ${
-                currentStep >= i + 2 ? "active" : "inactive"
-              }`}></div>
+              <div
+                className={`spacer d-none d-lg-block ${
+                  currentStep >= i + 2 ? "active" : "inactive"
+                }`}
+              ></div>
             )}
           </React.Fragment>
         ))}
