@@ -11,11 +11,12 @@ interface CardBarberProps {
 
 export const CardBarber: React.FC<CardBarberProps> = ({ barbers }) => {
   const navigate = useNavigate();
-  const {setCurrentStep} = useContext(CitasFormContext)
+  const { setCurrentStep, updateCitaData } = useContext(CitasFormContext);
 
- const handleSelectBarber = () => {
-  setCurrentStep((prevStep) => prevStep + 1);
-  navigate("/citas/service");
+  const handleSelectBarber = ({ barber }: any) => {
+    setCurrentStep((prevStep) => prevStep + 1);
+    updateCitaData({ workerId: barber.id });
+    navigate("/citas/service");
   };
   return (
     <>
@@ -32,7 +33,13 @@ export const CardBarber: React.FC<CardBarberProps> = ({ barbers }) => {
             <Card.Title className="fw-bold">{barber.nombre}</Card.Title>
             <Card.Text className="fw-light lh-1">{barber.direccion}</Card.Text>
             <Card.Text>{barber.horario}</Card.Text>
-            <StyledButton as={Button} className={"btn-sm "} onClick={()=>{handleSelectBarber()}}>
+            <StyledButton
+              as={Button}
+              className={"btn-sm "}
+              onClick={() => {
+                handleSelectBarber({ barber });
+              }}
+            >
               Seleccionar
             </StyledButton>
           </Card.Body>

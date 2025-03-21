@@ -8,11 +8,11 @@ import { CardService } from "./CardService";
 import services from "../data/services.json";
 
 export const SelectServicePage = () => {
-    const servicesData :Service[] = services.services
-
+  const servicesData: Service[] = services.services;
 
   const navigate = useNavigate();
-  const { setCurrentStep } = useContext(CitasFormContext);
+  const { setCurrentStep, citaData } =
+    useContext(CitasFormContext);
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
@@ -22,6 +22,8 @@ export const SelectServicePage = () => {
     setCurrentStep((prevStep) => prevStep + 1);
     navigate("/citas/date");
   };
+
+
   return (
     <>
       <div className="mx-3 mt-4">
@@ -29,25 +31,26 @@ export const SelectServicePage = () => {
         <div className="d-flex flex-wrap w-100 justify-content-center ">
           <CardService services={servicesData} />
         </div>
-        <div className="d-flex flex-row justify-content-between">
-        <StyledButton
-          as={Button}
-          className="mt-3"
-          onClick={() => {
-            handleGoBack();
-          }}
-        >
-          Regresar
-        </StyledButton>
-        <StyledButton
-          as={Button}
-          className="mt-3"
-          onClick={() => {
-            handleNext();
-          }}
-        >
-          Siguiente
-        </StyledButton>
+        <div className="d-flex flex-row justify-content-between align-items-center">
+          <StyledButton
+            as={Button}
+            className="mt-3"
+            onClick={() => {
+              handleGoBack();
+            }}
+          >
+            Regresar
+          </StyledButton>
+          <p className="fw-bold">Total: ${citaData.total}</p>
+          <StyledButton
+            as={Button}
+            className="mt-3"
+            onClick={() => {
+              handleNext();
+            }}
+          >
+            Siguiente
+          </StyledButton>
         </div>
       </div>
     </>

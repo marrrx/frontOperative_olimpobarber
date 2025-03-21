@@ -6,4 +6,5 @@ export interface CitasFormContextProps {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   citaData: CitaData;
   updateCitaData: (data: Partial<CitaData>) => void;
+  calcularEdad: (fechaNacimiento: string) => number;
 }

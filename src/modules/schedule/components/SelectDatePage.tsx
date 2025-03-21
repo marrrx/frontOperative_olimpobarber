@@ -1,24 +1,33 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 
 export const SelectDatePage = () => {
   const navigate = useNavigate();
-  const { setCurrentStep } = useContext(CitasFormContext);
+  const { setCurrentStep, updateCitaData, citaData } =
+    useContext(CitasFormContext);
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
     navigate(-1);
   };
   const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
-    navigate("/citas/date");
+    if (
+      citaData.date &&
+      citaData.time
+    ) {
+      setCurrentStep((prev) => prev + 1);
+      navigate("/citas/confirm");
+    } else {
+      toast.error("Debes seleccionar la fecha y hora");
+    }
   };
-  const [selected, setSelected] = useState<string | null>(null);
+
 
   const horas = [
     "10:00",
@@ -29,8 +38,10 @@ export const SelectDatePage = () => {
     "15:00",
     "16:00",
     "17:00",
+    "18:00",
+    "19:00",
   ];
-  const tomorrow = dayjs().add(1, "day"); 
+  const tomorrow = dayjs().add(1, "day");
   const disableSundays = (date: dayjs.Dayjs) => {
     return date.day() === 0;
   };
@@ -45,7 +56,15 @@ export const SelectDatePage = () => {
               label="Seleccionar"
               disablePast
               minDate={tomorrow}
-              shouldDisableDate={disableSundays} 
+              value={citaData.date ? dayjs(citaData.date) : null}
+              onChange={(newValue) => {
+                if (newValue) {
+                  updateCitaData({
+                    date: newValue.format("YYYY-MM-DD"),
+                  });
+                }
+              }}
+              shouldDisableDate={disableSundays}
             ></DatePicker>
           </div>
 
@@ -60,10 +79,13 @@ export const SelectDatePage = () => {
                     name="horas"
                     className="btn-check"
                     value={hora}
-                    checked={selected === hora}
-                    onChange={(e) => setSelected(e.target.value)}
+                    checked={citaData.time === hora} 
+                    onChange={(e) => {
+                      updateCitaData({ time: e.target.value }); 
+                    }}
                     disabled={i === 3}
                   />
+
                   <label
                     className="btn btn-outline-primary m-3"
                     htmlFor={`hora-${i}`}
@@ -75,7 +97,7 @@ export const SelectDatePage = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row justify-content-between align-items-center ">
           <StyledButton
             as={Button}
             className="mt-3"
@@ -85,6 +107,9 @@ export const SelectDatePage = () => {
           >
             Regresar
           </StyledButton>
+
+          <p className="fw-bold">Total: ${citaData.total}</p>
+
           <StyledButton
             as={Button}
             className="mt-3"

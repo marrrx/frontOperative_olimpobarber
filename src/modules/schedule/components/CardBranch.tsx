@@ -17,7 +17,7 @@ export const CardBranch: React.FC<CardBranchProps> = ({ branches }) => {
   const handleSelectBranch = (branch: number) => {
     updateCitaData({ branchId: branch });
     setCurrentStep((prevStep) => prevStep + 1);
-    navigate("barber");
+    navigate("/citas/barber");
   };
 
   
