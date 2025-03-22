@@ -1,0 +1,45 @@
+{
+    "services": [
+      {
+        "id": 1,
+        "nombre": "Corte niño",
+        "price": 80
+      },
+      {
+        "id": 2,
+        "nombre": "Corte adulto",
+        "price": 90
+      },
+      {
+        "id": 3,
+        "nombre": "Corte adulto mayor",
+        "price": 70
+      },
+      {
+        "id": 4,
+        "nombre": "Barba",
+        "price": 40
+      },
+      {
+        "id": 5,
+        "nombre": "Barba vaporizador",
+        "price": 50
+      },
+      {
+        "id": 6,
+        "nombre": "Ceja",
+        "price": 15
+      },
+      {
+        "id": 7,
+        "nombre": "Greca",
+        "price": 20
+      },
+      {
+        "id": 8,
+        "nombre": "Facial",
+        "price": 150
+      }
+    ]
+  }
+  

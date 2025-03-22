@@ -1,0 +1,67 @@
+.cirlceStep {
+  width: 40px;
+  height: 40px;
+  /* background-color: #d1d5db; */
+  border-radius: 50%;
+  font-weight: bold;
+}
+.active{
+  background-color: #eab308;
+  transition: background-color 0.4s ease-in-out;
+  
+
+}
+.inactive{
+  background-color: #d1d5db;
+}
+.spacer {
+  width: 90%;
+  height: 5px;
+}
+.label_step {
+  font-size: smaller;
+}
+
+@media (max-width: 768px) {
+  .cirlceStep {
+    width: 10px;
+    height: 10px;
+    color: transparent;
+  }
+}
+.customContainer {
+  background-image: url("https://raw.githubusercontent.com/marrrx/Imagenes/refs/heads/main/images/sillas.jpg");
+  background-size: cover;
+  min-height: 100vh;
+}
+@media (max-width: 768px) {
+  .customContainer {
+    background-image: none;
+  }
+}
+.card {
+  width: 95%;
+  justify-self: center;
+  align-self: center;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    padding-top: 0;
+  }
+}
+
+.cardService{
+  width: 30%;
+}
+@media (max-width: 768px) {
+  .cardService {
+    flex: auto;
+    width: 100%;
+
+  }
+}
