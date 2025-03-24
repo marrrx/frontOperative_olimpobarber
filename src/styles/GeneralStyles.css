@@ -38,5 +38,25 @@
 }
 
 
-body {
+.bannerBackground {
+  height: 500px;
+  background: linear-gradient(90deg, rgba(251,191,0,1) 33%, rgba(254,117,0,1) 85%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+}
+.card-img-home{
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+
+}
+
+.Grid4Home{
+  height: 200px;
+}
+
+@media (max-width: 768px) {
+
+.Grid4Home{
+  height: 500px;
+}
 }

@@ -1,45 +1,60 @@
 {
-    "services": [
-      {
-        "id": 1,
-        "nombre": "Corte niño",
-        "price": 80
-      },
-      {
-        "id": 2,
-        "nombre": "Corte adulto",
-        "price": 90
-      },
-      {
-        "id": 3,
-        "nombre": "Corte adulto mayor",
-        "price": 70
-      },
-      {
-        "id": 4,
-        "nombre": "Barba",
-        "price": 40
-      },
-      {
-        "id": 5,
-        "nombre": "Barba vaporizador",
-        "price": 50
-      },
-      {
-        "id": 6,
-        "nombre": "Ceja",
-        "price": 15
-      },
-      {
-        "id": 7,
-        "nombre": "Greca",
-        "price": 20
-      },
-      {
-        "id": 8,
-        "nombre": "Facial",
-        "price": 150
-      }
-    ]
-  }
-  
+  "services": [
+    {
+      "id": 1,
+      "nombre": "Corte niño",
+      "price": 80,
+      "descripcion": "Corte de cabello especializado para niños, con estilo moderno y adaptado a su edad.",
+      "imagen": "/corte.jpg"
+    },
+    {
+      "id": 2,
+      "nombre": "Corte adulto",
+      "price": 90,
+      "descripcion": "Corte de cabello clásico o moderno para adultos, con asesoramiento de estilo.",
+      "imagen": "/corte.jpg"
+    },
+    {
+      "id": 3,
+      "nombre": "Corte adulto mayor",
+      "price": 70,
+      "descripcion": "Corte de cabello diseñado para adultos mayores, con especial cuidado en el detalle.",
+      "imagen": "/corte.jpg"
+    },
+    {
+      "id": 4,
+      "nombre": "Barba",
+      "price": 40,
+      "descripcion": "Recorte y perfilado de barba para un look limpio y definido.",
+      "imagen": "/corte.jpg"
+    },
+    {
+      "id": 5,
+      "nombre": "Barba vaporizador",
+      "price": 50,
+      "descripcion": "Tratamiento con vapor para suavizar la barba y mejorar el afeitado.",
+      "imagen": "/corte.jpg"
+    },
+    {
+      "id": 6,
+      "nombre": "Ceja",
+      "price": 15,
+      "descripcion": "Diseño y perfilado de cejas para resaltar la expresión facial.",
+      "imagen": "/corte.jpg"
+    },
+    {
+      "id": 7,
+      "nombre": "Greca",
+      "price": 20,
+      "descripcion": "Dibujos o líneas artísticas en el cabello para un estilo único.",
+      "imagen": "/corte.jpg"
+    },
+    {
+      "id": 8,
+      "nombre": "Facial",
+      "price": 150,
+      "descripcion": "Limpieza facial profunda para una piel más saludable y rejuvenecida.",
+      "imagen": "/corte.jpg"
+    }
+  ]
+}
