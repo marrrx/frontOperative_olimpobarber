@@ -9,8 +9,8 @@ export const NavComponent = () => {
   return (
     <Navbar bg="black" data-bs-theme="dark" expand="lg" expanded={expanded}>
       <Container>
-        <Link to={"/"}>
           <Navbar.Brand>
+          <Link to={"/"}>
             <img
               src="/logo_light.png"
               width="100"
@@ -25,8 +25,8 @@ export const NavComponent = () => {
               className="d-md-none align-top"
               alt="logo"
             />
+            </Link>
           </Navbar.Brand>
-        </Link>
 
         <Navbar.Toggle
           aria-controls="navbar-nav"
