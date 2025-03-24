@@ -7,6 +7,7 @@ import { Page404 } from "./views/Page404";
 import { RoutesSchedule } from "./modules/schedule/RoutesSchedule";
 import { Layout } from "./views/Layout";
 import { PageHome } from "./modules/home/PageHome";
+import { PageAbout } from "./modules/about/PageAbout";
 
 export const App = () => {
   const basename = process.env.REACT_APP_BASE_NAME;
@@ -18,6 +19,7 @@ export const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<PageHome />} />
             <Route path="citas/*" element={<RoutesSchedule />} />
+            <Route path="servicios/*" element={<PageAbout />} />
           </Route>
 
           {/* <Route path="login/*" element={<RoutesAuth />} /> */}

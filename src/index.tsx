@@ -7,6 +7,8 @@ import { CitasFormProvider } from "./general/contexts/CitasFormContext/CitasForm
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import "dayjs/locale/es"; 
+import 'bootstrap-icons/font/bootstrap-icons.css'
+
 
 
 const root = ReactDOM.createRoot(
