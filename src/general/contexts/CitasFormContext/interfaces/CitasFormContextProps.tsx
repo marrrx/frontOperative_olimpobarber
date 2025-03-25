@@ -7,4 +7,5 @@ export interface CitasFormContextProps {
   citaData: CitaData;
   updateCitaData: (data: Partial<CitaData>) => void;
   calcularEdad: (fechaNacimiento: string) => number;
+  clearCitaData: () => void;
 }

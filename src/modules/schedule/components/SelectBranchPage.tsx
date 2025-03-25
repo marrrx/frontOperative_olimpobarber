@@ -6,6 +6,7 @@ import { CitasFormContext } from "../../../general/contexts/CitasFormContext/Cit
 import { useNavigate } from "react-router-dom";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { Button } from "react-bootstrap";
+import { motion } from "framer-motion";
 
 export const SelectBranchPage = () => {
   const branchesData: Branch[] = branches.branches;
@@ -14,11 +15,21 @@ export const SelectBranchPage = () => {
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-    navigate(-1);
+    navigate("/citas/");
   };
 
   return (
-    <div className="mx-3 mt-4">
+    <motion.div
+      className="mx-3 mt-4"
+      initial={{ opacity: 0, x: 50 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -50 }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut",
+      }}
+      
+    >
       <h5>Seleccionar sucursal</h5>
       <div className="d-flex flex-column flex-lg-row">
         <CardBranch branches={branchesData} />
@@ -32,6 +43,6 @@ export const SelectBranchPage = () => {
       >
         Regresar
       </StyledButton>
-    </div>
+    </motion.div>
   );
 };

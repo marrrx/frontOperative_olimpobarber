@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { StyledButton } from "../../general/components/StyledButton";
 
 export const PageHome = () => {
@@ -82,7 +83,6 @@ export const PageHome = () => {
     },
   ];
 
-
   return (
     <>
       <div className="">
@@ -93,6 +93,7 @@ export const PageHome = () => {
             transition={{
               duration: 1.7,
             }}
+            
             className="fw-bold display-4 "
           >
             Agenda tu cita en linea
@@ -101,16 +102,18 @@ export const PageHome = () => {
               donde quiera que estes.
             </small>
           </motion.h1>
-          <StyledButton
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              duration: 1.7,
-            }}
-            className="rounded btn mt-3 bg-black text-white"
-          >
-            Ir ahora
-          </StyledButton>
+          <Link to={"/citas"}>
+            <StyledButton
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 1.7,
+              }}
+              className="rounded btn mt-3 bg-black text-white"
+            >
+              Ir ahora
+            </StyledButton>
+          </Link>
         </div>
         <Container
           fluid
@@ -120,12 +123,10 @@ export const PageHome = () => {
             {prosCard.map((service, index) => (
               <div className="col" key={index}>
                 <AnimatedCard
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    duration: 1.5,
-                    delay: index * 0.2,
-                  }}
+                   initial={{ opacity: 0, x: -50 }}
+                   whileInView={{ opacity: 1, x: 0 }}
+                   viewport={{ once: false, amount: 0.2 }}
+                   transition={{ duration: 1.5, delay: index * 0.1 }}
                   className="h-100 d-flex flex-column flex-md-row  "
                 >
                   <div className="d-flex align-items-center ms-3 ">
@@ -145,14 +146,11 @@ export const PageHome = () => {
           </div>
         </Container>
 
-        <Container
-          
-          className=" h-100 align-items-center d-flex flex-column justify-content-center mt-5 "
-        >
+        <Container className=" h-100 align-items-center d-flex flex-column justify-content-center mt-5 ">
           <h2 className="mb-5 fw-bold">Nuestros servicios </h2>
 
-          <Row sm={1} md={2} lg={2} className="g-3 justify-content-center mb-5">
-          {servicesCard.slice(0, showMore ? 6 : 4).map((service, index) => (
+          <Row sm={1} md={2} lg={2} className="g-5 justify-content-center mb-5 w-100">
+            {servicesCard.slice(0, showMore ? 6 : 4).map((service, index) => (
               <Col
                 sm={12}
                 md={6}
@@ -160,7 +158,13 @@ export const PageHome = () => {
                 className="d-flex justify-content-center"
                 key={index}
               >
-                <Card className="h-100 w-75  position-relative overflow-hidden">
+                <Card
+                  className="h-100 w-75  position-relative overflow-hidden"
+                  as={motion.div}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5 }}                >
                   <Card.Img
                     src={service.imagen}
                     variant="fluid"
@@ -179,8 +183,11 @@ export const PageHome = () => {
               </Col>
             ))}
 
-            <StyledButton className="w-50" onClick={() => setShowMore(!showMore)}>
-            {showMore ? "Ver menos" : "Ver más"}
+            <StyledButton
+              className="w-50"
+              onClick={() => setShowMore(!showMore)}
+            >
+              {showMore ? "Ver menos" : "Ver más"}
             </StyledButton>
           </Row>
         </Container>

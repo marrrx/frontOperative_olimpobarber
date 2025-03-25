@@ -7,6 +7,7 @@ import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 export const InsertPersonalDataPage = () => {
   const navigate = useNavigate();
@@ -27,7 +28,11 @@ export const InsertPersonalDataPage = () => {
   };
 
   return (
-    <div className="mx-3 mt-4">
+    <motion.div className="mx-3 mt-4"    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{
+      duration: 1,
+    }}>
       <h5>Insertar datos</h5>
       <p>
         Los datos ingresados serán utilizados con la finalidad de agendar tu
@@ -88,6 +93,6 @@ export const InsertPersonalDataPage = () => {
           Siguiente
         </StyledButton>
       </div>
-    </div>
+    </motion.div>
   );
 };

@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { motion } from "framer-motion";
 import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -6,28 +7,46 @@ import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 
 export const ConfirmPage = () => {
-  const { setCurrentStep, citaData } = useContext(CitasFormContext);
+  const { setCurrentStep, citaData, clearCitaData } =
+    useContext(CitasFormContext);
   const navigate = useNavigate();
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
     navigate(-1);
   };
+  const confirm = () => {
+    clearCitaData();
+    setCurrentStep(1);
+    navigate("/citas");
+  };
 
   return (
-    <div className="mx-3 mt-4">
+    <motion.div
+      className="mx-3 mt-4"
+      initial={{ opacity: 0, x: 50 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -50 }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut",
+      }}
+      
+    >
       <h5>Confirmar</h5>
       <div className="d-flex flex-column">
         <p>
           {citaData.client.name + ` ` + citaData.client.apellido}, su cita será
           el día {dayjs(citaData.date).format("DD/MM")} a las{" "}
-          {dayjs(citaData.time, "HH:mm").format("h:mm A")}; con un precio total de ${citaData.total}.
+          {dayjs(citaData.time, "HH:mm").format("h:mm A")}; con un precio total
+          de ${citaData.total}.
         </p>
         <p>
           Si los datos son correctos, es necesario pagar el 50% del precio total
           para poder confirmar la cita, una vez depositado al número de cuenta
           mencionado a continuación, favor de enviar el comprobante vía
-          whatsapp; si el comprobante no es recibido en media hora la cita será cancelada.
+          whatsapp; si el comprobante no es recibido en media hora la cita será
+          cancelada.
         </p>
         <div className="d-flex flex-column flex-lg-row justify-content-lg-center align-items-lg-center ">
           <div>
@@ -51,25 +70,26 @@ export const ConfirmPage = () => {
         </div>
       </div>
       <div className="d-flex flex-row justify-content-between align-items-center mt-5">
-          <StyledButton
-            as={Button}
-            className="mt-3"
-            onClick={() => {
-              handleGoBack();
-            }}
-          >
-            Regresar
-          </StyledButton>
+        <StyledButton
+          as={Button}
+          className="mt-3"
+          onClick={() => {
+            handleGoBack();
+          }}
+        >
+          Regresar
+        </StyledButton>
 
-          <StyledButton
-            as={Button}
-            className="mt-3"
-            onClick={() => {
-            }}
-          >
-            Siguiente
-          </StyledButton>
-        </div>
-    </div>
+        <StyledButton
+          as={Button}
+          className="mt-3"
+          onClick={() => {
+            confirm();
+          }}
+        >
+          Finalizar
+        </StyledButton>
+      </div>
+    </motion.div>
   );
 };

@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { ConfirmPage } from "./components/ConfirmPage";
 import { InsertPersonalDataPage } from "./components/InsertPersonalDataPage";
 import { SelectBarberPage } from "./components/SelectBarberPage";
@@ -9,8 +10,26 @@ import { PageSchedule } from "./PageSchedule";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 export const RoutesSchedule = () => {
+  const RedirectToLastStep = () => {
+    const [redirectPath, setRedirectPath] = useState<string | null>(null);
+    const location = useLocation();
+
+    useEffect(() => {
+      const lastPath = sessionStorage.getItem("lastPath") || "/citas";
+      if (location.pathname === "/citas") {
+        setRedirectPath(lastPath);
+      }
+    }, [location.pathname]);
+
+    if (redirectPath) {
+      return <Navigate to={redirectPath} replace />;
+    }
+
+    return null; 
+  };
   return (
     <Routes>
+      <Route path="/citas" element={<RedirectToLastStep />} />
       <Route path="/*" element={<PageSchedule />}>
         <Route index element={<InsertPersonalDataPage />} />
         <Route element={<ProtectedRoute requiredStep="insert-data" />}>

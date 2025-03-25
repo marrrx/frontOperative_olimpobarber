@@ -1,28 +1,52 @@
+import { motion } from "framer-motion";
 import { useContext, useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { CitasFormContext } from "../../general/contexts/CitasFormContext/CitasFormContext";
 import { StepsBar } from "./components/StepsBar";
 import "./styles/styles.css";
+
+const stepMapping: { [key: string]: number } = {
+  "/citas": 1,
+  "/citas/branch": 2,
+  "/citas/barber": 3,
+  "/citas/service": 4,
+  "/citas/date": 5,
+  "/citas/confirm": 6,
+};
+
 export const PageSchedule = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { setCurrentStep } = useContext(CitasFormContext);
 
   useEffect(() => {
-    const stepMapping: { [key: string]: number } = {
-      "/citas": 1,
-      "/citas/branch": 2,
-      "/citas/barber": 3,
-      "/citas/service": 4,
-      "/citas/date": 5,
-      "/citas/confirm": 6,
-    };
+    const currentStep = stepMapping[location.pathname] || 1;
+    setCurrentStep(currentStep);
 
-    setCurrentStep(stepMapping[location.pathname] || 0);
+    if (location.pathname !== "/citas") {
+      sessionStorage.setItem("lastPath", location.pathname);
+    }
   }, [location.pathname, setCurrentStep]);
 
+  useEffect(() => {
+    const lastPath = sessionStorage.getItem("lastPath");
+    if (lastPath) {
+      navigate(lastPath, { replace: true });
+    }
+  }, [navigate]);
+
   return (
-    <div className="overflow-hidden customContainer p-md-4">
+    <Container
+      fluid
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.5,
+      }}
+    >
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -34,13 +58,8 @@ export const PageSchedule = () => {
         pauseOnHover={false}
         theme="light"
       />
-      <div className="text-center text-white mt-5 d-none d-md-block">
-        <h2>Olimpo Barber</h2>
-        {/* <p>Somos una empresa con años de experiencia </p> */}
-      </div>
-
-      <div className="card overflow-hidden bg-white rounded-2 mt-5 p-md-5">
-        <div className="ms-3">
+      <div className="card overflow-hidden bg-white rounded-2 mt-2 p-md-5">
+        <div>
           <h2>Agenda tu visita</h2>
           <p>
             Sigue los pasos para agendar tu cita en la sucursal y con tu barbero
@@ -49,8 +68,8 @@ export const PageSchedule = () => {
         </div>
 
         <StepsBar />
-        <Outlet />
+        <Outlet/>
       </div>
-    </div>
+    </Container>
   );
 };
