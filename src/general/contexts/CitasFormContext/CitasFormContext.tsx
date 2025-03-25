@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { CitaData } from "./interfaces/CitaData";
 import { CitasFormContextProps } from "./interfaces/CitasFormContextProps";
 import { ProviderProps } from "./interfaces/CitasFormProviderProps";
@@ -17,21 +17,37 @@ export const CitasFormContext = createContext<CitasFormContextProps>({
     total: 0,
   },
   updateCitaData: () => {},
-  calcularEdad: () => 0
+  calcularEdad: () => 0,
+  clearCitaData: () => {},
 });
 
 export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
-  const [currentStep, setCurrentStep] = useState<number>(1);
-
-  const [citaData, setCitaData] = useState<CitaData>({
-    client: { name: "", apellido: "", fecha_nacimiento: "" },
-    branchId: 0,
-    workerId: 0,
-    date: "",
-    time: "",
-    services: [],
-    total: 0,
+  const [currentStep, setCurrentStep] = useState<number>(() => {
+    return Number(sessionStorage.getItem("currentStep")) || 1;
   });
+
+  const [citaData, setCitaData] = useState<CitaData>(() => {
+    const savedData = sessionStorage.getItem("citaData");
+    return savedData
+      ? JSON.parse(savedData)
+      : {
+          client: { name: "", apellido: "", fecha_nacimiento: "" },
+          branchId: 0,
+          workerId: 0,
+          date: "",
+          time: "",
+          services: [],
+          total: 0,
+        };
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("currentStep", String(currentStep));
+  }, [currentStep]);
+
+  useEffect(() => {
+    sessionStorage.setItem("citaData", JSON.stringify(citaData));
+  }, [citaData]);
 
   const updateCitaData = (data: Partial<CitaData>) => {
     setCitaData((prevData) => ({
@@ -41,6 +57,20 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
         ? { ...prevData.client, ...data.client }
         : prevData.client,
     }));
+  };
+  const clearCitaData = () => {
+    setCitaData({
+      client: { name: "", apellido: "", fecha_nacimiento: "" },
+      branchId: 0,
+      workerId: 0,
+      date: "",
+      time: "",
+      services: [],
+      total: 0,
+    });
+    sessionStorage.removeItem("citaData");
+    sessionStorage.removeItem("currentStep");
+    sessionStorage.removeItem("lastPath");
   };
 
   const calcularEdad = (fechaNacimiento: string): number => {
@@ -56,7 +86,14 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
   console.log(citaData);
   return (
     <CitasFormContext.Provider
-      value={{ currentStep, setCurrentStep, citaData, updateCitaData,calcularEdad }}
+      value={{
+        currentStep,
+        setCurrentStep,
+        citaData,
+        updateCitaData,
+        calcularEdad,
+        clearCitaData,
+      }}
     >
       {children}
     </CitasFormContext.Provider>

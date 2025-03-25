@@ -6,27 +6,41 @@ import { CitasFormContext } from "../../../general/contexts/CitasFormContext/Cit
 import { Service } from "../interfaces/service";
 import { CardService } from "./CardService";
 import services from "../data/services.json";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 export const SelectServicePage = () => {
   const servicesData: Service[] = services.services;
 
   const navigate = useNavigate();
-  const { setCurrentStep, citaData } =
-    useContext(CitasFormContext);
+  const { setCurrentStep, citaData } = useContext(CitasFormContext);
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-    navigate(-1);
+    navigate("/citas/barber");
   };
   const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
-    navigate("/citas/date");
+    if (citaData.services.length > 0) {
+      setCurrentStep((prevStep) => prevStep + 1);
+      navigate("/citas/date");
+    } else {
+      toast.error("Debes selccionar al menos un servicio");
+    }
   };
-
 
   return (
     <>
-      <div className="mx-3 mt-4">
+      <motion.div
+        className="mx-3 mt-4"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -50 }}
+        transition={{
+          duration: 0.6,
+          ease: "easeOut",
+        }}
+        
+      >
         <h5>Seleccionar servicios</h5>
         <div className="d-flex flex-wrap w-100 justify-content-center ">
           <CardService services={servicesData} />
@@ -52,7 +66,7 @@ export const SelectServicePage = () => {
             Siguiente
           </StyledButton>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
