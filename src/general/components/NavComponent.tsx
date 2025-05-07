@@ -44,17 +44,24 @@ export const NavComponent = () => {
             </StyledNavLink>
             <StyledNavLink
               className="rounded me-5"
-              to="/citas"
+              to="/agendar"
               onClick={() => setExpanded(false)}
             >
-              Citas
+              Agendar
             </StyledNavLink>
             <StyledNavLink
-              className="rounded"
+              className="rounded me-5"
               to="/servicios"
               onClick={() => setExpanded(false)}
             >
               Acerca de nostros
+            </StyledNavLink>
+            <StyledNavLink
+              className="rounded"
+              to="/"
+              onClick={() => setExpanded(false)}
+            >
+             Mis citas
             </StyledNavLink>
           </Nav>
         </Navbar.Collapse>

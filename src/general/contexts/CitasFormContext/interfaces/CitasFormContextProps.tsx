@@ -8,4 +8,8 @@ export interface CitasFormContextProps {
   updateCitaData: (data: Partial<CitaData>) => void;
   calcularEdad: (fechaNacimiento: string) => number;
   clearCitaData: () => void;
+  selectedServices: number[];
+  setSelectedServices: React.Dispatch<SetStateAction<number[]>>;
+  totalTemp: number;
+  setTotalTemp: React.Dispatch<SetStateAction<number>>;
 }

@@ -19,7 +19,8 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "dayjs": "^1.11.13",
-    "framer-motion": "12.5.0",
+    "motion": "^12.8.0",
+    "framer-motion": "12.8.0",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
@@ -52,6 +53,7 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
+    ],
+    "start": "HTTPS=true react-scripts start"
   }
 }

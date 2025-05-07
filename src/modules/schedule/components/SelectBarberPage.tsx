@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { use, useContext, useEffect } from "react";
 import { Barber } from "../interfaces/Barber";
 import barbers from "../data/barbers.json";
 import { CardBarber } from "./CardBarber";
@@ -7,16 +7,21 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import { motion } from "framer-motion";
+import { DataContext } from "../../../general/contexts/DataContext/DataContext";
 
 export const SelectBarberPage = () => {
-  const barbersData: Barber[] = barbers.barbers;
   const navigate = useNavigate();
-  const { setCurrentStep } = useContext(CitasFormContext);
+  const { setCurrentStep,citaData } = useContext(CitasFormContext);
+  const {workers,fetchWorkersByBranch} = useContext(DataContext);
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-    navigate("/citas/branch");
+    navigate("/citas/agendar");
   };
+  
+  useEffect(() => {
+  fetchWorkersByBranch(citaData.branchId);
+}, []);
 
   return (
     <motion.div
@@ -32,7 +37,7 @@ export const SelectBarberPage = () => {
     >
       <h5>Seleccionar barbero</h5>
       <div className="d-flex flex-column flex-lg-row">
-        <CardBarber barbers={barbersData} />
+        <CardBarber barbers={workers} />
       </div>
       <StyledButton
         className="mt-3"

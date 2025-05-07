@@ -21,7 +21,7 @@ export const InsertPersonalDataPage = () => {
       citaData.client.fecha_nacimiento
     ) {
       setCurrentStep((prev) => prev + 1);
-      navigate("/citas/branch");
+      navigate("/agendar/branch");
     } else {
       toast.error("Debes completar todos los campos primero");
     }

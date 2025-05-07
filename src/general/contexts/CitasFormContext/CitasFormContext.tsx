@@ -19,9 +19,16 @@ export const CitasFormContext = createContext<CitasFormContextProps>({
   updateCitaData: () => {},
   calcularEdad: () => 0,
   clearCitaData: () => {},
+  selectedServices: [],
+  setSelectedServices: () => {},
+  totalTemp: 0,
+  setTotalTemp: () => {},
 });
 
 export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
+
+
+
   const [currentStep, setCurrentStep] = useState<number>(() => {
     return Number(sessionStorage.getItem("currentStep")) || 1;
   });
@@ -50,14 +57,16 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
   }, [citaData]);
 
   const updateCitaData = (data: Partial<CitaData>) => {
-    setCitaData((prevData) => ({
-      ...prevData,
+    setCitaData((prev) => ({
+      ...prev,
       ...data,
-      client: data.client
-        ? { ...prevData.client, ...data.client }
-        : prevData.client,
+      client: {
+        ...prev.client,
+        ...(data.client || {}),
+      },
     }));
   };
+  
   const clearCitaData = () => {
     setCitaData({
       client: { name: "", apellido: "", fecha_nacimiento: "" },
@@ -83,7 +92,12 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
     return edad;
   };
 
-  console.log(citaData);
+
+
+  const [selectedServices, setSelectedServices] = useState<number[]>(citaData.services);
+  const [totalTemp, setTotalTemp] = useState(citaData.total);
+
+
   return (
     <CitasFormContext.Provider
       value={{
@@ -93,6 +107,10 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
         updateCitaData,
         calcularEdad,
         clearCitaData,
+        selectedServices,
+        setSelectedServices,
+        totalTemp,
+        setTotalTemp
       }}
     >
       {children}

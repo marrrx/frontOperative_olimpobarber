@@ -7,15 +7,17 @@ import { useNavigate } from "react-router-dom";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { Button } from "react-bootstrap";
 import { motion } from "framer-motion";
+import { DataContext } from "../../../general/contexts/DataContext/DataContext";
+import { IBranch } from "../../../general/contexts/DataContext/interfaces/IBranch";
 
 export const SelectBranchPage = () => {
-  const branchesData: Branch[] = branches.branches;
   const { setCurrentStep } = useContext(CitasFormContext);
+  const {branches}= useContext(DataContext);
   const navigate = useNavigate();
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-    navigate("/citas/");
+    navigate("/agendar/");
   };
 
   return (
@@ -32,7 +34,7 @@ export const SelectBranchPage = () => {
     >
       <h5>Seleccionar sucursal</h5>
       <div className="d-flex flex-column flex-lg-row">
-        <CardBranch branches={branchesData} />
+        <CardBranch branches={branches} />
       </div>
       <StyledButton
         className="mt-3"
