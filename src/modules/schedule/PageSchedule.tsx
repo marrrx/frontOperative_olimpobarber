@@ -6,14 +6,15 @@ import { ToastContainer } from "react-toastify";
 import { CitasFormContext } from "../../general/contexts/CitasFormContext/CitasFormContext";
 import { StepsBar } from "./components/StepsBar";
 import "./styles/styles.css";
+import { DataContext } from "../../general/contexts/DataContext/DataContext";
 
 const stepMapping: { [key: string]: number } = {
-  "/citas": 1,
-  "/citas/branch": 2,
-  "/citas/barber": 3,
-  "/citas/service": 4,
-  "/citas/date": 5,
-  "/citas/confirm": 6,
+  "/agendar": 1,
+  "/agendar/branch": 2,
+  "/agendar/barber": 3,
+  "/agendar/service": 4,
+  "/agendar/date": 5,
+  "/agendar/confirm": 6,
 };
 
 export const PageSchedule = () => {
@@ -23,9 +24,12 @@ export const PageSchedule = () => {
 
   useEffect(() => {
     const currentStep = stepMapping[location.pathname] || 1;
-    setCurrentStep(currentStep);
 
-    if (location.pathname !== "/citas") {
+    if (currentStep !== stepMapping[location.pathname]) {
+      setCurrentStep(currentStep);
+    }
+
+    if (location.pathname !== "/agendar") {
       sessionStorage.setItem("lastPath", location.pathname);
     }
   }, [location.pathname, setCurrentStep]);
@@ -37,15 +41,10 @@ export const PageSchedule = () => {
     }
   }, [navigate]);
 
+
   return (
     <Container
       fluid
-      as={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: 0.5,
-      }}
     >
       <ToastContainer
         position="top-right"
@@ -68,7 +67,13 @@ export const PageSchedule = () => {
         </div>
 
         <StepsBar />
-        <Outlet/>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Outlet />
+        </motion.div>
       </div>
     </Container>
   );

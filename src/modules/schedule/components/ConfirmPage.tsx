@@ -5,18 +5,37 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
+import { DataContext } from "../../../general/contexts/DataContext/DataContext";
+import { ICreateAppointmentDTO } from "../../../general/contexts/DataContext/interfaces/ICreateAppointmentDTO";
 
 export const ConfirmPage = () => {
-  const { setCurrentStep, citaData, clearCitaData } =
+  const { setCurrentStep, citaData, clearCitaData, setSelectedServices } =
     useContext(CitasFormContext);
+  const { setAvailableTimes, setSelectedWorker, createAppointment } =
+    useContext(DataContext);
   const navigate = useNavigate();
+  dayjs.locale("es");
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
     navigate(-1);
   };
+
+  const createAppoinmentDTO: ICreateAppointmentDTO = {
+    clientName: citaData.client.name,
+    clientLastName: citaData.client.apellido,
+    branchId: citaData.branchId,
+    workerId: citaData.workerId,
+    date: citaData.date,
+    time: citaData.time,
+    total: citaData.total,
+    servicesId: citaData.services,
+  };
+
   const confirm = () => {
+    createAppointment(createAppoinmentDTO);
     clearCitaData();
+    setSelectedServices([]);
     setCurrentStep(1);
     navigate("/citas");
   };
@@ -31,13 +50,12 @@ export const ConfirmPage = () => {
         duration: 0.6,
         ease: "easeOut",
       }}
-      
     >
       <h5>Confirmar</h5>
       <div className="d-flex flex-column">
         <p>
           {citaData.client.name + ` ` + citaData.client.apellido}, su cita será
-          el día {dayjs(citaData.date).format("DD/MM")} a las{" "}
+          el día {dayjs(citaData.date).format("dddd DD [de] MMMM")} a las{" "}
           {dayjs(citaData.time, "HH:mm").format("h:mm A")}; con un precio total
           de ${citaData.total}.
         </p>

@@ -1,46 +1,38 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
+import { DataContext } from "../../../general/contexts/DataContext/DataContext";
 
 export const SelectDatePage = () => {
   const navigate = useNavigate();
   const { setCurrentStep, updateCitaData, citaData } =
     useContext(CitasFormContext);
+  const { fetchAvailableTimes, availableTimes, selectedWorker } =
+    useContext(DataContext);
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-    navigate("/citas/service");
+    navigate("/agendar/service");
   };
   const handleNext = () => {
     if (citaData.date && citaData.time) {
       setCurrentStep((prev) => prev + 1);
-      navigate("/citas/confirm");
+      navigate("/agendar/confirm");
     } else {
       toast.error("Debes seleccionar la fecha y hora");
     }
   };
 
-  const horas = [
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-  ];
   const tomorrow = dayjs().add(1, "day");
-  const disableSundays = (date: dayjs.Dayjs) => {
-    return date.day() === 0;
+
+  const disableDayOff = (date: dayjs.Dayjs) => {
+    return date.day() === selectedWorker.dayOff;
   };
 
   return (
@@ -54,7 +46,6 @@ export const SelectDatePage = () => {
           duration: 0.6,
           ease: "easeOut",
         }}
-        
       >
         <h5>Seleccionar fecha y hora</h5>
         <div className="d-flex flex-column flex-lg-row justify-content-center align-items-center">
@@ -66,21 +57,28 @@ export const SelectDatePage = () => {
               value={citaData.date ? dayjs(citaData.date) : null}
               onChange={(newValue) => {
                 if (newValue) {
+                  const formattedDate = newValue.format("YYYY-MM-DD");
                   updateCitaData({
-                    date: newValue.format("YYYY-MM-DD"),
+                    date: formattedDate,
                   });
+                  fetchAvailableTimes(citaData.workerId, formattedDate);
                 }
               }}
-              shouldDisableDate={disableSundays}
+              shouldDisableDate={disableDayOff}
             ></DatePicker>
           </div>
 
           <div className="ms-md-5 mt-5 mt-sm-0 text-center text-sm-start ">
-            <p>Selecciona la hora</p>
+            {availableTimes.length > 0 ? (
+              <p>Selecciona la hora</p>
+            ) : (
+              <p>Selecciona una fecha para ver las horas disponibles</p>
+            )}
             <div className="d-flex flex-wrap justify-content-center">
-              {horas.map((hora, i) => (
+              {availableTimes.map((hora, i) => (
                 <>
                   <input
+                    key={i}
                     id={`hora-${i}`}
                     type="radio"
                     name="horas"
@@ -90,7 +88,6 @@ export const SelectDatePage = () => {
                     onChange={(e) => {
                       updateCitaData({ time: e.target.value });
                     }}
-                    disabled={i === 3}
                   />
 
                   <label

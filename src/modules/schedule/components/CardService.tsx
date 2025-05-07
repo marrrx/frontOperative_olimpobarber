@@ -1,33 +1,61 @@
 import { Checkbox } from "@mui/material";
-import React, { useContext, useMemo } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 import { Card } from "react-bootstrap";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
-import { Service } from "../interfaces/service";
 import "../styles/styles.css";
+import { IService } from "../../../general/contexts/DataContext/interfaces/IService";
 interface CardServiceProps {
-  services: Service[];
+  services: IService[];
 }
 
 export const CardService: React.FC<CardServiceProps> = ({ services }) => {
-  const { updateCitaData, citaData, calcularEdad } =
+  const { updateCitaData, citaData, calcularEdad, totalTemp, setTotalTemp,selectedServices,setSelectedServices } =
     useContext(CitasFormContext);
+    
+
+
+
 
   const edadCliente = calcularEdad(citaData.client.fecha_nacimiento);
-  console.log(edadCliente);
-
   const filteredServices = useMemo(() => {
     return services.filter((service) => {
       if (edadCliente < 18) {
-        return service.nombre === "Corte niño" || !service.nombre.includes("Corte");
+        return (
+          service.name === "Corte de niño" || !service.name.includes("Corte")
+        );
       }
       if (edadCliente >= 60) {
-        return service.nombre === "Corte adulto mayor" || !service.nombre.includes("Corte");
+        return (
+          service.name === "Corte de adulto mayor" ||
+          !service.name.includes("Corte")
+        );
       }
-      return service.nombre === "Corte adulto" || !service.nombre.includes("Corte");
+      return service.name === "Corte" || !service.name.includes("Corte");
     });
   }, [edadCliente, services]);
-  
-  
+
+
+
+  const handleCheckboxChange = (serviceId: number, servicePrice: number) => {
+    const isSelected = selectedServices.includes(serviceId);
+
+    let newSelectedServices = [...selectedServices];
+    let newTotal = totalTemp;
+
+    if (isSelected) {
+      newSelectedServices = newSelectedServices.filter((id) => id !== serviceId);
+      newTotal -= servicePrice;
+    } else {
+      newSelectedServices.push(serviceId);
+      newTotal += servicePrice;
+    }
+
+    setSelectedServices(newSelectedServices);
+    setTotalTemp(newTotal);
+
+  };
+
+ 
 
   return (
     <>
@@ -38,27 +66,25 @@ export const CardService: React.FC<CardServiceProps> = ({ services }) => {
         >
           <Card.Body>
             <div className="d-flex flex-row align-items-center justify-content-between ">
-              <Card.Title className="fw-bold">{service.nombre}</Card.Title>
+              <Card.Title className="fw-bold">{service.name}</Card.Title>
               <Checkbox
-                checked={citaData.services.includes(service.id)}
-                onChange={() => {
-                  const isSelected = citaData.services.includes(service.id);
-                  updateCitaData({
-                    services: isSelected
-                      ? citaData.services.filter((id) => id !== service.id)
-                      : [...citaData.services, service.id],
-                    total: isSelected
-                      ? citaData.total - service.price
-                      : citaData.total + service.price,
-                  });
-                }}
-              ></Checkbox>
+                checked={selectedServices.includes(service.id)}
+                onChange={() => handleCheckboxChange(service.id, service.price)}
+              />
             </div>
             <Card.Text className="fw-light lh-1">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.{" "}
+              {service.description}
             </Card.Text>
             <Card.Text className="fw-600 text-success">
               ${service.price}
+              {service.id === 5 && (
+                <span
+                  className="text-muted fst-italic d-block"
+                  style={{ fontSize: "0.85rem" }}
+                >
+                  *Este precio puede aumentar dependiendo el diseño.
+                </span>
+              )}
             </Card.Text>
           </Card.Body>
         </Card>
