@@ -1,7 +1,7 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -33,6 +33,10 @@ export const SelectDatePage = () => {
 
   const disableDayOff = (date: dayjs.Dayjs) => {
     return date.day() === selectedWorker.dayOff;
+  };
+
+  const formatTime = (time: string) => {
+    return dayjs(time,["HH:mm"]).format("HH:mm a");
   };
 
   return (
@@ -91,10 +95,11 @@ export const SelectDatePage = () => {
                   />
 
                   <label
+                    key={hora}
                     className="btn btn-outline-primary m-3"
                     htmlFor={`hora-${i}`}
                   >
-                    {hora}
+                    {formatTime(hora)}
                   </label>
                 </>
               ))}

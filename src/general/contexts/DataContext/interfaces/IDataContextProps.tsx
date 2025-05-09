@@ -1,3 +1,4 @@
+import { IAppointment } from "./IAppointment";
 import { IBranch } from "./IBranch";
 import { ICreateAppointmentDTO } from "./ICreateAppointmentDTO";
 import { IService } from "./IService";
@@ -16,4 +17,6 @@ export interface IDataContextProps{
     setAvailableTimes:React.Dispatch<React.SetStateAction<string[]>>
     fetchAvailableTimes:(workerId:number,date:string)=>Promise<void>
     createAppointment:(appointmentData:ICreateAppointmentDTO)=>Promise<void>
+    fetchAppointments:()=>Promise<void>
+    appointments:IAppointment[]
 }

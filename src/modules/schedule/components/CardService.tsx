@@ -1,20 +1,25 @@
 import { Checkbox } from "@mui/material";
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React, { useContext, useMemo } from "react";
 import { Card } from "react-bootstrap";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import "../styles/styles.css";
 import { IService } from "../../../general/contexts/DataContext/interfaces/IService";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 interface CardServiceProps {
   services: IService[];
 }
 
 export const CardService: React.FC<CardServiceProps> = ({ services }) => {
-  const { updateCitaData, citaData, calcularEdad, totalTemp, setTotalTemp,selectedServices,setSelectedServices } =
-    useContext(CitasFormContext);
-    
+  const {
+    citaData,
+    calcularEdad,
+    totalTemp,
+    setTotalTemp,
+    selectedServices,
+    setSelectedServices,
+  } = useContext(CitasFormContext);
 
-
-
+  const isMobile = useIsMobile();
 
   const edadCliente = calcularEdad(citaData.client.fecha_nacimiento);
   const filteredServices = useMemo(() => {
@@ -34,8 +39,6 @@ export const CardService: React.FC<CardServiceProps> = ({ services }) => {
     });
   }, [edadCliente, services]);
 
-
-
   const handleCheckboxChange = (serviceId: number, servicePrice: number) => {
     const isSelected = selectedServices.includes(serviceId);
 
@@ -43,7 +46,9 @@ export const CardService: React.FC<CardServiceProps> = ({ services }) => {
     let newTotal = totalTemp;
 
     if (isSelected) {
-      newSelectedServices = newSelectedServices.filter((id) => id !== serviceId);
+      newSelectedServices = newSelectedServices.filter(
+        (id) => id !== serviceId
+      );
       newTotal -= servicePrice;
     } else {
       newSelectedServices.push(serviceId);
@@ -52,29 +57,42 @@ export const CardService: React.FC<CardServiceProps> = ({ services }) => {
 
     setSelectedServices(newSelectedServices);
     setTotalTemp(newTotal);
-
   };
 
- 
+ return (
+  <>
+    {filteredServices.map((service) => {
+      const isSelected = selectedServices.includes(service.id);
 
-  return (
-    <>
-      {filteredServices.map((service) => (
+      const handleSelect = () => {
+        if (isMobile) {
+          handleCheckboxChange(service.id, service.price);
+        }
+      };
+
+      return (
         <Card
-          className="d-flex flex-column border shadow-sm m-2 cardService"
+          className={`d-flex flex-column border shadow-sm m-2 cardService ${
+            isSelected ? "bg-light border-success" : ""
+          }`}
           key={service.id}
+          onClick={handleSelect}
+          style={{ cursor: isMobile ? "pointer" : "default" }}
         >
           <Card.Body>
-            <div className="d-flex flex-row align-items-center justify-content-between ">
+            <div className="d-flex flex-row align-items-center justify-content-between">
               <Card.Title className="fw-bold">{service.name}</Card.Title>
-              <Checkbox
-                checked={selectedServices.includes(service.id)}
-                onChange={() => handleCheckboxChange(service.id, service.price)}
-              />
+
+              {!isMobile && (
+                <Checkbox
+                  checked={isSelected}
+                  onChange={() => handleCheckboxChange(service.id, service.price)}
+                />
+              )}
             </div>
-            <Card.Text className="fw-light lh-1">
-              {service.description}
-            </Card.Text>
+
+            <Card.Text className="fw-light lh-1">{service.description}</Card.Text>
+
             <Card.Text className="fw-600 text-success">
               ${service.price}
               {service.id === 5 && (
@@ -88,7 +106,8 @@ export const CardService: React.FC<CardServiceProps> = ({ services }) => {
             </Card.Text>
           </Card.Body>
         </Card>
-      ))}
-    </>
-  );
+      );
+    })}
+  </>
+);
 };

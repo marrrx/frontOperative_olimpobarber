@@ -1,6 +1,5 @@
-import React, { use, useContext, useEffect } from "react";
-import { Barber } from "../interfaces/Barber";
-import barbers from "../data/barbers.json";
+import {  useContext, useEffect } from "react";
+
 import { CardBarber } from "./CardBarber";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +15,7 @@ export const SelectBarberPage = () => {
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-    navigate("/citas/agendar");
+    navigate("/agendar/branch");
   };
   
   useEffect(() => {

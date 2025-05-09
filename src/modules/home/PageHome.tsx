@@ -36,6 +36,8 @@ export const PageHome = () => {
     },
   ];
 
+  const baseURL = process.env.REACT_APP_BASE_URL;
+
   return (
     <>
       <div className="">
@@ -54,7 +56,7 @@ export const PageHome = () => {
               donde quiera que estes.
             </small>
           </motion.h1>
-          <Link to={"/citas"}>
+          <Link to={"/agendar"}>
             <StyledButton
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -108,7 +110,7 @@ export const PageHome = () => {
             className="g-5 justify-content-center mb-5 w-100"
           >
             {services
-              .filter((service) => ![2, 3,8].includes(service.id)) // excluir ID 3 y 5
+              .filter((service) => ![2, 3, 8].includes(service.id)) // excluir ID 3 y 5
               .slice(0, showMore ? 4 : 2)
               .map((service, index) => (
                 <Col
@@ -127,7 +129,7 @@ export const PageHome = () => {
                     transition={{ duration: 0.5 }}
                   >
                     <Card.Img
-                      src={`http://localhost:5217/${service.imagePath}`}
+                      src={`${baseURL}${service.imagePath}`}
                       variant="fluid"
                       className="card-img-home w-100 h-100"
                     />

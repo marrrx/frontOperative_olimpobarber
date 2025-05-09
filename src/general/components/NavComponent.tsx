@@ -58,7 +58,7 @@ export const NavComponent = () => {
             </StyledNavLink>
             <StyledNavLink
               className="rounded"
-              to="/"
+              to="/citas"
               onClick={() => setExpanded(false)}
             >
              Mis citas

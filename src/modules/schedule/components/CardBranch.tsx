@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import { IBranch } from "../../../general/contexts/DataContext/interfaces/IBranch";
-import { DataContext } from "../../../general/contexts/DataContext/DataContext";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 interface CardBranchProps {
   branches: IBranch[];
@@ -12,7 +12,7 @@ interface CardBranchProps {
 
 export const CardBranch: React.FC<CardBranchProps> = ({ branches }) => {
   const { setCurrentStep, updateCitaData } = useContext(CitasFormContext);
-  const { fetchWorkersByBranch } = useContext(DataContext);
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
 
   const handleSelectBranch = (branch: number) => {
@@ -24,7 +24,11 @@ export const CardBranch: React.FC<CardBranchProps> = ({ branches }) => {
   return (
     <>
       {branches.map((branch, index) => (
-        <div key={index} className=" border m-2 shadow-sm d-flex flex-column">
+        <div
+          key={index}
+          className=" border m-2 shadow-sm d-flex flex-column"
+          onClick={isMobile ? () => handleSelectBranch(branch.id) : undefined}
+        >
           <div className="card-body">
             <h6 className="card-title fw-bold">{branch.name}</h6>
             <small>{branch.address}</small>
@@ -37,18 +41,18 @@ export const CardBranch: React.FC<CardBranchProps> = ({ branches }) => {
             <div>
               <small className="text-success"></small>
             </div>
-            <div className="mb-0">
-              <StyledButton
-                as={Button}
-                variant="filled"
-                className="btn shadow-sm px-3 py-2 btn-sm btn-md btn-lg"
-                onClick={() => {
-                  handleSelectBranch(branch.id);
-                }}                           
-              >
-                Seleccionar
-              </StyledButton>
-            </div>
+              {!isMobile && (
+                <div className="mb-0">
+                  <StyledButton
+                    as={Button}
+                    variant="filled"
+                    className="btn shadow-sm px-3 py-2 btn-sm btn-md btn-lg"
+                    onClick={() => handleSelectBranch(branch.id)}
+                  >
+                    Seleccionar
+                  </StyledButton>
+                </div>
+              )}
           </div>
         </div>
       ))}

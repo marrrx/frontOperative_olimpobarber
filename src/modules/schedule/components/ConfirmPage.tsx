@@ -7,11 +7,12 @@ import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import { DataContext } from "../../../general/contexts/DataContext/DataContext";
 import { ICreateAppointmentDTO } from "../../../general/contexts/DataContext/interfaces/ICreateAppointmentDTO";
+import Swal from "sweetalert2";
 
 export const ConfirmPage = () => {
   const { setCurrentStep, citaData, clearCitaData, setSelectedServices } =
     useContext(CitasFormContext);
-  const { setAvailableTimes, setSelectedWorker, createAppointment } =
+  const { createAppointment } =
     useContext(DataContext);
   const navigate = useNavigate();
   dayjs.locale("es");
@@ -32,13 +33,29 @@ export const ConfirmPage = () => {
     servicesId: citaData.services,
   };
 
-  const confirm = () => {
-    createAppointment(createAppoinmentDTO);
-    clearCitaData();
-    setSelectedServices([]);
-    setCurrentStep(1);
-    navigate("/citas");
-  };
+const confirm = async () => {
+  const result = await Swal.fire({
+    title: "¿Confirmar cita?",
+    text: "¿Estás seguro de que los datos con correctos?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Sí, confirmar",
+    cancelButtonText: "Cancelar",
+  });
+
+  if (result.isConfirmed) {
+    try {
+      await createAppointment(createAppoinmentDTO);
+      clearCitaData();
+      setSelectedServices([]);
+      setCurrentStep(1);
+      navigate("/citas");
+      Swal.fire("¡Cita creada!", "Recuerda enviar tu comprobante de pago.", "success");
+    } catch (error) {
+      Swal.fire("Error", "No se pudo crear la cita. Intenta nuevamente.", "error");
+    }
+  }
+};
 
   return (
     <motion.div

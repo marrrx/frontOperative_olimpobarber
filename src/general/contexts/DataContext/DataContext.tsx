@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { IDataContextProps } from "./interfaces/IDataContextProps";
 import { IBranch } from "./interfaces/IBranch";
 import { IService } from "./interfaces/IService";
@@ -9,12 +9,13 @@ import serviceService from "./services/ServiceService";
 import availabilityService from "./services/AvailabilityService";
 import appointmentService from "./services/AppointmentService";
 import { ICreateAppointmentDTO } from "./interfaces/ICreateAppointmentDTO";
-import { CitasFormContext } from "../CitasFormContext/CitasFormContext";
+import { IAppointment } from "./interfaces/IAppointment";
 
 export const DataContext = createContext<IDataContextProps>({
   branches: [],
   services: [],
   workers: [],
+  appointments: [],
   selectedWorker: {
     id: 0,
     name: "",
@@ -30,6 +31,7 @@ export const DataContext = createContext<IDataContextProps>({
   setAvailableTimes: () => {},
   fetchAvailableTimes: async () => {},
   createAppointment: async () => {},
+  fetchAppointments: async () => {},
 });
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -40,9 +42,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [workers, setWorkers] = useState<IWorker[]>([]);
   const [availableTimes, setAvailableTimes] = useState<string[]>([]);
   const [selectedWorker, setSelectedWorker] = useState<IWorker>({} as IWorker);
+  const [appointments, setAppointments]= useState<IAppointment[]>([]);
 
 
-    const { clearCitaData, setSelectedServices } = useContext(CitasFormContext);
+
+  const [createdAppointmentId, setCreatedAppointmentId] = useState<number>(0);
+  
 
   const fetchBranches = async () => {
     try {
@@ -90,6 +95,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         appointmentData
       );
       console.log(response.data);
+      setCreatedAppointmentId(response.data.id);
       setAvailableTimes([]);
       setSelectedWorker({
         id: 0,
@@ -98,9 +104,26 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         avatarImagePath: "",
         timeSlots: [],
       });
-
     } catch (error) {
       console.error("Error al crear la cita:", error);
+    }
+  };
+
+  const savedAppoinmentsIds = JSON.parse(
+    localStorage.getItem("appointments") || "[]"
+  );
+  if (!savedAppoinmentsIds.includes(createdAppointmentId)) {
+    savedAppoinmentsIds.push(createdAppointmentId);
+    localStorage.setItem("appointments", JSON.stringify(savedAppoinmentsIds));
+  }
+
+  const fetchAppointments = async () => {
+    try {
+      const response = await appointmentService.getVariousAppointments();
+      console.log(response.data);
+      setAppointments(response.data);
+    } catch (error) {
+      console.error("Error al obtener citas:", error);
     }
   };
 
@@ -124,6 +147,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         selectedWorker,
         setSelectedWorker,
         createAppointment,
+        fetchAppointments,
+        appointments
       }}
     >
       {children}
