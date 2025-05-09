@@ -1,6 +1,4 @@
 import { CardBranch } from "./CardBranch";
-import branches from "../data/branches.json";
-import { Branch } from "../interfaces/Branch";
 import { useContext } from "react";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +6,6 @@ import { StyledButton } from "../../../general/components/StyledButton";
 import { Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { DataContext } from "../../../general/contexts/DataContext/DataContext";
-import { IBranch } from "../../../general/contexts/DataContext/interfaces/IBranch";
 
 export const SelectBranchPage = () => {
   const { setCurrentStep } = useContext(CitasFormContext);

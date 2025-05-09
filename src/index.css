@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* en tu archivo CSS global o componente */
+.small-swal {
+  font-size: 14px;
+}

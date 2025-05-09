@@ -8,6 +8,7 @@ import { RoutesSchedule } from "./modules/schedule/RoutesSchedule";
 import { Layout } from "./views/Layout";
 import { PageHome } from "./modules/home/PageHome";
 import { PageAbout } from "./modules/about/PageAbout";
+import { PageAppointments } from "./modules/appointments/PageAppointments";
 
 export const App = () => {
   const basename = process.env.REACT_APP_BASE_NAME;
@@ -20,7 +21,7 @@ export const App = () => {
             <Route index element={<PageHome />} />
             <Route path="agendar/*" element={<RoutesSchedule />} />
             <Route path="servicios/*" element={<PageAbout />} />
-            <Route path="citas/*" element={<PageAbout />} />
+            <Route path="citas/*" element={<PageAppointments />} />
 
           </Route>
 

@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
-import { Service } from "../interfaces/service";
 import { CardService } from "./CardService";
-import services from "../data/services.json";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { DataContext } from "../../../general/contexts/DataContext/DataContext";
 
@@ -23,7 +21,7 @@ export const SelectServicePage = () => {
 
   const handleGoBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-    navigate("/citas/barber");
+    navigate("/agendar/barber");
   };
   const handleNext = () => {
     if (selectedServices.length > 0) {

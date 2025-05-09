@@ -6,7 +6,6 @@ import { ToastContainer } from "react-toastify";
 import { CitasFormContext } from "../../general/contexts/CitasFormContext/CitasFormContext";
 import { StepsBar } from "./components/StepsBar";
 import "./styles/styles.css";
-import { DataContext } from "../../general/contexts/DataContext/DataContext";
 
 const stepMapping: { [key: string]: number } = {
   "/agendar": 1,
