@@ -10,7 +10,7 @@ import { ICreateAppointmentDTO } from "../../../general/contexts/DataContext/int
 import Swal from "sweetalert2";
 
 export const ConfirmPage = () => {
-  const { setCurrentStep, citaData, clearCitaData, setSelectedServices } =
+  const { setCurrentStep, citaData, clearCitaData, setSelectedServices,totalTemp } =
     useContext(CitasFormContext);
   const { createAppointment } =
     useContext(DataContext);
@@ -29,7 +29,6 @@ export const ConfirmPage = () => {
     workerId: citaData.workerId,
     date: citaData.date,
     time: citaData.time,
-    total: citaData.total,
     servicesId: citaData.services,
   };
 
@@ -74,7 +73,7 @@ const confirm = async () => {
           {citaData.client.name + ` ` + citaData.client.apellido}, su cita será
           el día {dayjs(citaData.date).format("dddd DD [de] MMMM")} a las{" "}
           {dayjs(citaData.time, "HH:mm").format("h:mm A")}; con un precio total
-          de ${citaData.total}.
+          de ${totalTemp}.
         </p>
         <p>
           Si los datos son correctos, es necesario pagar el 50% del precio total
@@ -92,7 +91,7 @@ const confirm = async () => {
             <h6 className="mb-0 fst-italic">Nombre:</h6>
             <strong> Rafael Marquez</strong>
             <h6 className="mb-0 fst-italic">Monto 50%:</h6>
-            <strong>${Math.round(citaData.total / 2)}</strong>
+            <strong>${Math.round(totalTemp / 2)}</strong>
           </div>
           <div className="ms-0 ms-lg-5  mt-3 mt-lg-0">
             <Button
