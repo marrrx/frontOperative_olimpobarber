@@ -11,7 +11,7 @@ import { DataContext } from "../../../general/contexts/DataContext/DataContext";
 
 export const SelectDatePage = () => {
   const navigate = useNavigate();
-  const { setCurrentStep, updateCitaData, citaData } =
+  const { setCurrentStep, updateCitaData, citaData, totalTemp } =
     useContext(CitasFormContext);
   const { fetchAvailableTimes, availableTimes, selectedWorker } =
     useContext(DataContext);
@@ -36,7 +36,7 @@ export const SelectDatePage = () => {
   };
 
   const formatTime = (time: string) => {
-    return dayjs(time,["HH:mm"]).format("HH:mm a");
+    return dayjs(time, ["HH:mm"]).format("HH:mm a");
   };
 
   return (
@@ -117,7 +117,7 @@ export const SelectDatePage = () => {
             Regresar
           </StyledButton>
 
-          <p className="fw-bold">Total: ${citaData.total}</p>
+          <p className="fw-bold">Total: ${totalTemp}</p>
 
           <StyledButton
             as={Button}

@@ -3,7 +3,6 @@ export interface ICreateAppointmentDTO {
     clientLastName:string,
     date:string,
     time:string,
-    total:number,
     branchId:number,
     workerId:number,
     servicesId:number[],

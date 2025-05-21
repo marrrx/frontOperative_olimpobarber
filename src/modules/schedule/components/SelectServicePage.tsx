@@ -28,7 +28,6 @@ export const SelectServicePage = () => {
       const updatedCita = {
         ...citaData,
         services: selectedServices,
-        total: totalTemp,
       };
   
       // Guarda directamente en sessionStorage
@@ -38,7 +37,6 @@ export const SelectServicePage = () => {
       // Luego actualiza el state
       updateCitaData({
         services: selectedServices,
-        total: totalTemp,
       });
   
       // Luego navega
