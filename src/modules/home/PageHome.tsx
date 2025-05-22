@@ -129,7 +129,7 @@ export const PageHome = () => {
                     transition={{ duration: 0.5 }}
                   >
                     <Card.Img
-                      src={`${baseURL}${service.imagePath}`}
+                      src={service.imageBase64}
                       variant="fluid"
                       className="card-img-home w-100 h-100"
                     />

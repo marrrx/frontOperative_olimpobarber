@@ -23,7 +23,6 @@ export const CardBarber: React.FC<CardBarberProps> = ({ barbers }) => {
     navigate("/agendar/service");
     setSelectedWorker(barber);
   };
-  const baseURL = process.env.REACT_APP_BASE_URL;
   return (
     <>
       {barbers.map((barber, index) => (
@@ -36,7 +35,7 @@ export const CardBarber: React.FC<CardBarberProps> = ({ barbers }) => {
             <Card.Img
               className="rounded-circle w-100"
               style={{ objectFit: "cover", aspectRatio: 1 / 1 }}
-              src={`${baseURL}${barber.avatarImagePath}`}
+              src={barber.imageBase64}
             />
           </div>
           <Card.Body className="w-25 w-lg-100">
