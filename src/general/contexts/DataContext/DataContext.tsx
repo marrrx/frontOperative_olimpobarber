@@ -20,7 +20,7 @@ export const DataContext = createContext<IDataContextProps>({
     id: 0,
     name: "",
     dayOff: 0,
-    avatarImagePath: "",
+    imageBase64: "",
     timeSlots: [],
   },
   setSelectedWorker: () => {},
@@ -101,7 +101,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         id: 0,
         name: "",
         dayOff: 0,
-        avatarImagePath: "",
+        imageBase64: "",
         timeSlots: [],
       });
     } catch (error) {

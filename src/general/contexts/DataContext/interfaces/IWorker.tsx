@@ -4,6 +4,6 @@ export interface IWorker {
     id: number;
     name: string;
     dayOff:number;
-    avatarImagePath: string;
+    imageBase64: string;
     timeSlots: ITimeSlot[];
 }
