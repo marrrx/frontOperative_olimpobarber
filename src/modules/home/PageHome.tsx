@@ -109,7 +109,7 @@ export const PageHome = () => {
             className="g-5 justify-content-center mb-5 w-100"
           >
             {services
-              .filter((service) => ![2, 3, 8].includes(service.id)) // excluir ID 3 y 5
+              .filter((service) => ![2, 3, 6].includes(service.id)) // excluir ID 3 y 5
               .slice(0, showMore ? 4 : 2)
               .map((service, index) => (
                 <Col
