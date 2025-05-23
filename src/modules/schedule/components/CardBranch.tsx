@@ -31,11 +31,7 @@ export const CardBranch: React.FC<CardBranchProps> = ({ branches }) => {
         >
           <div className="card-body">
             <h6 className="card-title fw-bold">{branch.name}</h6>
-            <small>{branch.address}</small>
-            <p className="card-text mt-2 fw-light lh-1">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
+            <p>{branch.address}</p  >
           </div>
           <div className=" d-flex flex-wrap p-2 mx-2 justify-content-between">
             <div>

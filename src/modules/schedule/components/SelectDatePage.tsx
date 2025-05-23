@@ -35,9 +35,7 @@ export const SelectDatePage = () => {
     return date.day() === selectedWorker.dayOff;
   };
 
-  const formatTime = (time: string) => {
-    return dayjs(time, ["HH:mm"]).format("HH:mm a");
-  };
+
 
   return (
     <>
@@ -99,7 +97,7 @@ export const SelectDatePage = () => {
                     className="btn btn-outline-primary m-3"
                     htmlFor={`hora-${i}`}
                   >
-                    {formatTime(hora)}
+                    {hora}
                   </label>
                 </>
               ))}
