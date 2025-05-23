@@ -35,8 +35,6 @@ export const SelectDatePage = () => {
     return date.day() === selectedWorker.dayOff;
   };
 
-
-
   return (
     <>
       <motion.div
@@ -86,7 +84,7 @@ export const SelectDatePage = () => {
                     name="horas"
                     className="btn-check"
                     value={hora}
-                    checked={citaData.time === hora}
+                    checked={citaData.time === hora.replace(/ (AM|PM)/i, "")}
                     onChange={(e) => {
                       updateCitaData({ time: e.target.value });
                     }}

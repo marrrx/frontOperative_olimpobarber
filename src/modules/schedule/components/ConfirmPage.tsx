@@ -10,10 +10,14 @@ import { ICreateAppointmentDTO } from "../../../general/contexts/DataContext/int
 import Swal from "sweetalert2";
 
 export const ConfirmPage = () => {
-  const { setCurrentStep, citaData, clearCitaData, setSelectedServices,totalTemp } =
-    useContext(CitasFormContext);
-  const { createAppointment } =
-    useContext(DataContext);
+  const {
+    setCurrentStep,
+    citaData,
+    clearCitaData,
+    setSelectedServices,
+    totalTemp,
+  } = useContext(CitasFormContext);
+  const { createAppointment } = useContext(DataContext);
   const navigate = useNavigate();
   dayjs.locale("es");
 
@@ -32,29 +36,37 @@ export const ConfirmPage = () => {
     servicesId: citaData.services,
   };
 
-const confirm = async () => {
-  const result = await Swal.fire({
-    title: "¿Confirmar cita?",
-    text: "¿Estás seguro de que los datos con correctos?",
-    icon: "question",
-    showCancelButton: true,
-    confirmButtonText: "Sí, confirmar",
-    cancelButtonText: "Cancelar",
-  });
+  const confirm = async () => {
+    const result = await Swal.fire({
+      title: "¿Confirmar cita?",
+      text: "¿Estás seguro de que los datos con correctos?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Sí, confirmar",
+      cancelButtonText: "Cancelar",
+    });
 
-  if (result.isConfirmed) {
-    try {
-      await createAppointment(createAppoinmentDTO);
-      clearCitaData();
-      setSelectedServices([]);
-      setCurrentStep(1);
-      navigate("/citas");
-      Swal.fire("¡Cita creada!", "Recuerda enviar tu comprobante de pago.", "success");
-    } catch (error) {
-      Swal.fire("Error", "No se pudo crear la cita. Intenta nuevamente.", "error");
+    if (result.isConfirmed) {
+      try {
+        await createAppointment(createAppoinmentDTO);
+        clearCitaData();
+        setSelectedServices([]);
+        setCurrentStep(1);
+        navigate("/citas");
+        Swal.fire(
+          "¡Cita creada!",
+          "Recuerda enviar tu comprobante de pago.",
+          "success"
+        );
+      } catch (error) {
+        Swal.fire(
+          "Error",
+          "No se pudo crear la cita. Intenta nuevamente.",
+          "error"
+        );
+      }
     }
-  }
-};
+  };
 
   return (
     <motion.div
@@ -71,9 +83,7 @@ const confirm = async () => {
       <div className="d-flex flex-column">
         <p>
           {citaData.client.name + ` ` + citaData.client.apellido}, su cita será
-          el día {dayjs(citaData.date).format("dddd DD [de] MMMM")} a las{" "}
-          {dayjs(citaData.time, "HH:mm").format("h:mm A")}; con un precio total
-          de ${totalTemp}.
+          el día {dayjs(citaData.date).format("dddd DD [de] MMMM")} a las {citaData.time}, con un precio total de ${totalTemp}.
         </p>
         <p>
           Si los datos son correctos, es necesario pagar el 50% del precio total
