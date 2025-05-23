@@ -190,7 +190,7 @@ export const PageAppointments = () => {
               </div>
               <div className=" d-flex flex-wrap p-2 mx-2 justify-content-between">
                 <div>
-                  <b className="text-danger">Cancelada</b>
+                  <b className="text-danger">Cancelada </b>
                 </div>
               </div>
             </div>
