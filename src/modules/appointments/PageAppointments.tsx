@@ -181,9 +181,9 @@ export const PageAppointments = () => {
                   <br />
                   <b> Barbero:</b> {appointment.workerName}
                   <br />
-                  <b>Fehca:</b> {formatDate(appointment.date)}
+                  <b>Fecha:</b> {formatDate(appointment.date)}
                   <br />
-                  <b> Hora:</b> {appointment.date}
+                  <b> Hora:</b> {appointment.time}
                   <br />
                   <b> Monto total:</b> ${appointment.total}
                 </p>
