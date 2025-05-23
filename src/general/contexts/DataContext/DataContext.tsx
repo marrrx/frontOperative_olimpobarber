@@ -10,6 +10,7 @@ import availabilityService from "./services/AvailabilityService";
 import appointmentService from "./services/AppointmentService";
 import { ICreateAppointmentDTO } from "./interfaces/ICreateAppointmentDTO";
 import { IAppointment } from "./interfaces/IAppointment";
+import { Dayjs } from "dayjs";
 
 export const DataContext = createContext<IDataContextProps>({
   branches: [],
@@ -54,6 +55,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await branchService.getAllBranches<IBranch[]>();
       setBranches(response.data);
     } catch (error) {
+      setBranches([]);
       console.error("Error al obtener branches:", error);
     }
   };
@@ -62,6 +64,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await serviceService.getAllServices<IService[]>();
       setServices(response.data);
     } catch (error) {
+      setServices([]);
       console.error("Error al obtener services:", error);
     }
   };
@@ -73,10 +76,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
       console.log(response.data);
       setWorkers(response.data);
     } catch (error) {
+      setWorkers([]);
       console.error("Error al obtener workers:", error);
     }
   };
-  const fetchAvailableTimes = async (workerId: number, date: string) => {
+  const fetchAvailableTimes = async (workerId: number, date: Dayjs) => {
     try {
       const response = await availabilityService.getHoursAvailable<string[]>(
         workerId,
