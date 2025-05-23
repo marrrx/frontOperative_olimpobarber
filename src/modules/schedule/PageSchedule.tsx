@@ -19,7 +19,7 @@ const stepMapping: { [key: string]: number } = {
 export const PageSchedule = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setCurrentStep } = useContext(CitasFormContext);
+  const { setCurrentStep,setTotalTemp } = useContext(CitasFormContext);
 
   useEffect(() => {
     const currentStep = stepMapping[location.pathname] || 1;
@@ -35,6 +35,7 @@ export const PageSchedule = () => {
 
   useEffect(() => {
     const lastPath = sessionStorage.getItem("lastPath");
+    setTotalTemp(Number(sessionStorage.getItem("totalTemp")))
     if (lastPath) {
       navigate(lastPath, { replace: true });
     }

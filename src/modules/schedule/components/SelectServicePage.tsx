@@ -30,16 +30,13 @@ export const SelectServicePage = () => {
         services: selectedServices,
       };
   
-      // Guarda directamente en sessionStorage
       sessionStorage.setItem("citaData", JSON.stringify(updatedCita));
       sessionStorage.setItem("lastPath", "/citas/date");
 
-      // Luego actualiza el state
       updateCitaData({
         services: selectedServices,
       });
   
-      // Luego navega
       setCurrentStep((prev) => prev + 1);
       navigate("/agendar/date");
     } else {

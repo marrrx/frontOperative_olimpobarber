@@ -57,6 +57,7 @@ export const CardService: React.FC<CardServiceProps> = ({ services }) => {
 
     setSelectedServices(newSelectedServices);
     setTotalTemp(newTotal);
+    sessionStorage.setItem("totalTemp", newTotal.toString());
   };
 
  return (
