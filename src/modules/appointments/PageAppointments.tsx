@@ -50,9 +50,7 @@ export const PageAppointments = () => {
   const formatDate = (date: string) => {
     return dayjs(date).format("dddd DD [de] MMMM");
   };
-  const formatTime = (date: string) => {
-    return dayjs(date).format("hh:mm A");
-  };
+ 
   const showPaymentInfo = () => {
     Swal.fire({
       title: "Información de pago",
@@ -105,7 +103,7 @@ export const PageAppointments = () => {
                   <br />
                   <b>Fecha:</b> {formatDate(appointment.date)}
                   <br />
-                  <b> Hora:</b> {formatTime(appointment.time)}
+                  <b> Hora:</b> {appointment.time}
                   <br />
                   <b> Monto total:</b> ${appointment.total}
                 </p>
