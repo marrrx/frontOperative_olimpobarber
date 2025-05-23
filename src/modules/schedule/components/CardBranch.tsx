@@ -26,7 +26,7 @@ export const CardBranch: React.FC<CardBranchProps> = ({ branches }) => {
       {branches.map((branch, index) => (
         <div
           key={index}
-          className=" border m-2 shadow-sm d-flex flex-column"
+          className=" border m-2 shadow-sm d-flex flex-column w-100"
           onClick={isMobile ? () => handleSelectBranch(branch.id) : undefined}
         >
           <div className="card-body">

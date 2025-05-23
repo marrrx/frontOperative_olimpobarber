@@ -13,7 +13,17 @@ code {
 }
 
 
-/* en tu archivo CSS global o componente */
 .small-swal {
   font-size: 14px;
+}
+
+
+.responsive-text {
+  font-size: 1rem; 
+}
+
+@media (max-width: 576px) {
+  .responsive-text {
+    font-size: 0.8rem;  
+  }
 }

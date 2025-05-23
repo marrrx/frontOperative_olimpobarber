@@ -84,7 +84,7 @@ export const SelectDatePage = () => {
                     name="horas"
                     className="btn-check"
                     value={hora}
-                    checked={citaData.time === hora.replace(/ (AM|PM)/i, "")}
+                    checked={citaData.time === hora}
                     onChange={(e) => {
                       updateCitaData({ time: e.target.value });
                     }}

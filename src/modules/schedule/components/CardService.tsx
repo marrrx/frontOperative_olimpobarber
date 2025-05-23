@@ -96,7 +96,7 @@ export const CardService: React.FC<CardServiceProps> = ({ services }) => {
 
             <Card.Text className="fw-600 text-success">
               ${service.price}
-              {service.id === 5 && (
+              {service.name === "Greca" && (
                 <span
                   className="text-muted fst-italic d-block"
                   style={{ fontSize: "0.85rem" }}
