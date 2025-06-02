@@ -50,7 +50,7 @@ export const PageAppointments = () => {
   const formatDate = (date: string) => {
     return dayjs(date).format("dddd DD [de] MMMM");
   };
- 
+
   const showPaymentInfo = () => {
     Swal.fire({
       title: "Información de pago",
@@ -97,15 +97,16 @@ export const PageAppointments = () => {
                 </h6>
                 <small></small>
                 <p className="card-text mt-2 fw-light lh-1">
-                  <b> Sucursal:</b> {appointment.branchName}
+                  <b className="fw-bold"> Sucursal:</b> {appointment.branchName}
                   <br />
-                  <b> Barbero:</b> {appointment.workerName}
+                  <b className="fw-bold"> Barbero:</b> {appointment.workerName}
                   <br />
-                  <b>Fecha:</b> {formatDate(appointment.date)}
+                  <b className="fw-bold">Fecha: </b>
+                  {formatDate(appointment.date)}
                   <br />
-                  <b> Hora:</b> {appointment.time}
+                  <b className="fw-bold"> Hora:</b> {appointment.time}
                   <br />
-                  <b> Monto total:</b> ${appointment.total}
+                  <b className="fw-bold"> Monto total:</b> ${appointment.total}
                 </p>
               </div>
               <div className=" d-flex flex-wrap p-2 mx-2 justify-content-between">
@@ -144,15 +145,16 @@ export const PageAppointments = () => {
                 </h6>
                 <small></small>
                 <p className="card-text mt-2 fw-light lh-1">
-                  <b> Sucursal:</b> {appointment.branchName}
+                  <b className="fw-bold"> Sucursal:</b> {appointment.branchName}
                   <br />
-                  <b> Barbero:</b> {appointment.workerName}
+                  <b className="fw-bold"> Barbero:</b> {appointment.workerName}
                   <br />
-                  <b>Fecha:</b> {formatDate(appointment.date)}
+                  <b className="fw-bold">Fecha: </b>
+                  {formatDate(appointment.date)}
                   <br />
-                  <b> Hora:</b> {appointment.time}
+                  <b className="fw-bold"> Hora:</b> {appointment.time}
                   <br />
-                  <b> Monto total:</b> ${appointment.total}
+                  <b className="fw-bold"> Monto total:</b> ${appointment.total}
                 </p>
               </div>
               <div className=" d-flex flex-wrap p-2 mx-2 justify-content-between">
@@ -177,15 +179,16 @@ export const PageAppointments = () => {
                 </h6>
                 <small></small>
                 <p className="card-text mt-2 fw-light lh-1">
-                  <b> Sucursal:</b> {appointment.branchName}
+                  <b className="fw-bold"> Sucursal:</b> {appointment.branchName}
                   <br />
-                  <b> Barbero:</b> {appointment.workerName}
+                  <b className="fw-bold"> Barbero:</b> {appointment.workerName}
                   <br />
-                  <b>Fecha:</b> {formatDate(appointment.date)}
+                  <b className="fw-bold">Fecha: </b>
+                  {formatDate(appointment.date)}
                   <br />
-                  <b> Hora:</b> {appointment.time}
+                  <b className="fw-bold"> Hora:</b> {appointment.time}
                   <br />
-                  <b> Monto total:</b> ${appointment.total}
+                  <b className="fw-bold"> Monto total:</b> ${appointment.total}
                 </p>
               </div>
               <div className=" d-flex flex-wrap p-2 mx-2 justify-content-between">

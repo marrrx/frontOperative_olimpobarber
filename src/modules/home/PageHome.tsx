@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useContext, useState } from "react";
+import { SetStateAction, useContext, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StyledButton } from "../../general/components/StyledButton";
@@ -36,6 +36,7 @@ export const PageHome = () => {
     },
   ];
 
+  const [hovered, setHovered] = useState<number|boolean|null>(false);
 
   return (
     <>
@@ -126,11 +127,24 @@ export const PageHome = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, amount: 0.2 }}
                     transition={{ duration: 0.5 }}
+                    onMouseEnter={() => setHovered(index)}
+                    onMouseLeave={() => setHovered(null)}
                   >
-                    <Card.Img
+                    <motion.img
                       src={service.imageBase64}
-                      variant="fluid"
-                      className="card-img-home w-100 h-100"
+                      className="w-100 h-100"
+                      initial={false}
+                      animate={{
+                        WebkitMaskImage:
+                          hovered === index
+                            ? "linear-gradient(to bottom, rgba(0,0,0,1) 100%, rgba(0,0,0,0) 100%)"
+                            : "linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)",
+                        maskImage:
+                          hovered === index
+                            ? "linear-gradient(to bottom, rgba(0,0,0,1) 100%, rgba(0,0,0,0) 100%)"
+                            : "linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)",
+                      }}
+                      transition={{ duration: 0.4, ease:"easeInOut"}}
                     />
                     <Card.Body className="position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-50 text-white text-center py-2">
                       <h5 className="fw-bold">{service.name}</h5>
