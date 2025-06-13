@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 
 export const getAge = (dateString: string) => {
     let today = new Date();
@@ -9,3 +10,7 @@ export const getAge = (dateString: string) => {
     }
     return age;
 }
+
+export const formatDate = (date: string) => {
+    return dayjs(date).format("dddd DD [de] MMMM");
+  };

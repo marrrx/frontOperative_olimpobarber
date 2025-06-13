@@ -8,7 +8,7 @@ export const CitasFormContext = createContext<CitasFormContextProps>({
   currentStep: 1,
   setCurrentStep: () => {},
   citaData: {
-    client: { name: "", apellido: "", fecha_nacimiento: "" },
+    client: { name: "", apellido: "", fecha_nacimiento: "",telefono:"" },
     branchId: 0,
     workerId: 0,
     date: "",
@@ -66,7 +66,7 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const clearCitaData = () => {
     setCitaData({
-      client: { name: "", apellido: "", fecha_nacimiento: "" },
+      client: { name: "", apellido: "", fecha_nacimiento: "",telefono:"" },
       branchId: 0,
       workerId: 0,
       date: "",

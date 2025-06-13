@@ -9,6 +9,8 @@ import { Layout } from "./views/Layout";
 import { PageHome } from "./modules/home/PageHome";
 import { PageAbout } from "./modules/about/PageAbout";
 import { PageAppointments } from "./modules/appointments/PageAppointments";
+import { PageTerms } from "./modules/legal/PageTerms";
+import { PagePrivacity } from "./modules/legal/PagePrivacity";
 
 export const App = () => {
   const basename = process.env.REACT_APP_BASE_NAME;
@@ -22,6 +24,8 @@ export const App = () => {
             <Route path="agendar/*" element={<RoutesSchedule />} />
             <Route path="servicios/*" element={<PageAbout />} />
             <Route path="citas/*" element={<PageAppointments />} />
+            <Route path="terms" element={<PageTerms />} />
+            <Route path="privacity" element={<PagePrivacity />} />
 
           </Route>
 

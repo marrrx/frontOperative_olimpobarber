@@ -56,7 +56,7 @@
 }
 
 .cardService{
-  width: 30%;
+  height: 90%;
 }
 @media (max-width: 768px) {
   .cardService {

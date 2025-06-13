@@ -3,6 +3,7 @@ export interface CitaData {
     name: string;
     apellido: string;
     fecha_nacimiento: string;
+    telefono:string;
   };
   branchId: number;
   workerId: number;

@@ -17,7 +17,7 @@ export const CardBranch: React.FC<CardBranchProps> = ({ branches }) => {
 
   const handleSelectBranch = (branch: number) => {
     updateCitaData({ branchId: branch });
-    setCurrentStep((prevStep) => prevStep + 1);
+    setCurrentStep((prevStep) => prevStep);
     navigate("/agendar/barber");
   };
 
@@ -41,8 +41,9 @@ export const CardBranch: React.FC<CardBranchProps> = ({ branches }) => {
                 <div className="mb-0">
                   <StyledButton
                     as={Button}
+                    size="sm"
                     variant="filled"
-                    className="btn shadow-sm px-3 py-2 btn-sm btn-md btn-lg"
+                    className="shadow-sm px-3 py-2"
                     onClick={() => handleSelectBranch(branch.id)}
                   >
                     Seleccionar

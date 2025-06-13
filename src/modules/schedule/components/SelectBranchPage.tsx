@@ -6,10 +6,11 @@ import { StyledButton } from "../../../general/components/StyledButton";
 import { Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { DataContext } from "../../../general/contexts/DataContext/DataContext";
+import { StyledBackButton } from "../../../general/components/StyledBackButton";
 
 export const SelectBranchPage = () => {
   const { setCurrentStep } = useContext(CitasFormContext);
-  const {branches}= useContext(DataContext);
+  const { branches } = useContext(DataContext);
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -27,21 +28,22 @@ export const SelectBranchPage = () => {
         duration: 0.6,
         ease: "easeOut",
       }}
-      
     >
       <h5>Seleccionar sucursal</h5>
       <div className="d-flex flex-column flex-lg-row">
         <CardBranch branches={branches} />
       </div>
-      <StyledButton
+      <StyledBackButton
+      size="sm"
         className="mt-3"
         as={Button}
         onClick={() => {
           handleGoBack();
         }}
       >
+        <i className="bi bi-arrow-left-circle me-2"></i>
         Regresar
-      </StyledButton>
+      </StyledBackButton>
     </motion.div>
   );
 };

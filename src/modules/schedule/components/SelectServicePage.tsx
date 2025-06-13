@@ -1,5 +1,5 @@
-import  { useContext } from "react";
-import { Button } from "react-bootstrap";
+import { useContext } from "react";
+import { Button, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
@@ -7,6 +7,8 @@ import { CardService } from "./CardService";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { DataContext } from "../../../general/contexts/DataContext/DataContext";
+import { StyledBackButton } from "../../../general/components/StyledBackButton";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 export const SelectServicePage = () => {
   const navigate = useNavigate();
@@ -18,9 +20,10 @@ export const SelectServicePage = () => {
     totalTemp,
   } = useContext(CitasFormContext);
   const { services } = useContext(DataContext);
+  const isMobile = useIsMobile();
 
   const handleGoBack = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
+    setCurrentStep((prevStep) => prevStep);
     navigate("/agendar/barber");
   };
   const handleNext = () => {
@@ -29,14 +32,14 @@ export const SelectServicePage = () => {
         ...citaData,
         services: selectedServices,
       };
-  
+
       sessionStorage.setItem("citaData", JSON.stringify(updatedCita));
       sessionStorage.setItem("lastPath", "/citas/date");
 
       updateCitaData({
         services: selectedServices,
       });
-  
+
       setCurrentStep((prev) => prev + 1);
       navigate("/agendar/date");
     } else {
@@ -57,30 +60,41 @@ export const SelectServicePage = () => {
         }}
       >
         <h5>Seleccionar servicios</h5>
-        <div className="d-flex flex-wrap w-100 justify-content-center ">
+        <Row lg={3} className="d-flex justify-content-center">
           <CardService services={services} />
-        </div>
-        <div className="d-flex flex-row justify-content-between align-items-center">
-          <StyledButton
-            as={Button}
-            className="mt-3"
-            onClick={() => {
-              handleGoBack();
-            }}
-          >
-            Regresar
-          </StyledButton>
-          <p className="fw-bold">Total: ${totalTemp}</p>
-          <StyledButton
-            as={Button}
-            className="mt-3"
-            onClick={ () => {
-              handleNext();
-            }}
-          >
-            Siguiente
-          </StyledButton>
-        </div>
+        </Row>
+        <Row
+          className={`${
+            isMobile
+              ? "justify-content-center mt-3 gx-2"
+              : "justify-content-start mt-3"
+          }`}
+        >
+          <Col xs="auto">
+            <p className="fw-bold text-center text-md-start mb-0">
+              Total: ${totalTemp}
+            </p>
+          </Col>
+        </Row>
+        <Row
+          className={`${
+            isMobile ? "justify-content-center" : "justify-content-start"
+          } mt-3`}
+        >
+          <Col xs="auto">
+            <div className="d-flex gap-2">
+              <StyledBackButton as={Button} onClick={handleGoBack} size="sm">
+                <i className="bi bi-arrow-left-circle me-2"></i>
+                Regresar
+              </StyledBackButton>
+
+              <StyledButton as={Button} onClick={handleNext} size="sm">
+                <i className="bi bi-arrow-right-circle me-2"></i>
+                Siguiente
+              </StyledButton>
+            </div>
+          </Col>
+        </Row>
       </motion.div>
     </>
   );

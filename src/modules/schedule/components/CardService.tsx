@@ -1,6 +1,6 @@
 import { Checkbox } from "@mui/material";
 import React, { useContext, useMemo } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import "../styles/styles.css";
 import { IService } from "../../../general/contexts/DataContext/interfaces/IService";
@@ -12,7 +12,6 @@ interface CardServiceProps {
 export const CardService: React.FC<CardServiceProps> = ({ services }) => {
   const {
     citaData,
-    calcularEdad,
     totalTemp,
     setTotalTemp,
     selectedServices,
@@ -21,15 +20,15 @@ export const CardService: React.FC<CardServiceProps> = ({ services }) => {
 
   const isMobile = useIsMobile();
 
-  const edadCliente = calcularEdad(citaData.client.fecha_nacimiento);
+  const edadCliente = citaData.client.fecha_nacimiento;
   const filteredServices = useMemo(() => {
     return services.filter((service) => {
-      if (edadCliente < 18) {
+      if (edadCliente === "1") {
         return (
           service.name === "Corte de niño" || !service.name.includes("Corte")
         );
       }
-      if (edadCliente >= 60) {
+      if (edadCliente === "3") {
         return (
           service.name === "Corte de adulto mayor" ||
           !service.name.includes("Corte")
@@ -60,55 +59,61 @@ export const CardService: React.FC<CardServiceProps> = ({ services }) => {
     sessionStorage.setItem("totalTemp", newTotal.toString());
   };
 
- return (
-  <>
-    {filteredServices.map((service) => {
-      const isSelected = selectedServices.includes(service.id);
+  return (
+    <>
+      {filteredServices.map((service) => {
+        const isSelected = selectedServices.includes(service.id);
 
-      const handleSelect = () => {
-        if (isMobile) {
-          handleCheckboxChange(service.id, service.price);
-        }
-      };
+        const handleSelect = () => {
+          if (isMobile) {
+            handleCheckboxChange(service.id, service.price);
+          }
+        };
 
-      return (
-        <Card
-          className={`d-flex flex-column border shadow-sm m-2 cardService ${
-            isSelected ? "bg-light border-success" : ""
-          }`}
-          key={service.id}
-          onClick={handleSelect}
-          style={{ cursor: isMobile ? "pointer" : "default" }}
-        >
-          <Card.Body>
-            <div className="d-flex flex-row align-items-center justify-content-between">
-              <Card.Title className="fw-bold">{service.name}</Card.Title>
+        return (
+          <Col>
+            <Card
+              className={`d-flex flex-column border shadow-sm m-2 w-100 cardService ${
+                isSelected ? "bg-light border-success" : ""
+              }`}
+              key={service.id}
+              onClick={handleSelect}
+              style={{ cursor: isMobile ? "pointer" : "default" }}
+            >
+              <Card.Body>
+                <div className="d-flex flex-row align-items-center justify-content-between">
+                  <Card.Title className="fw-bold">{service.name}</Card.Title>
 
-              {!isMobile && (
-                <Checkbox
-                  checked={isSelected}
-                  onChange={() => handleCheckboxChange(service.id, service.price)}
-                />
-              )}
-            </div>
+                  {!isMobile && (
+                    <Checkbox
+                      checked={isSelected}
+                      onChange={() =>
+                        handleCheckboxChange(service.id, service.price)
+                      }
+                    />
+                  )}
+                </div>
 
-            <Card.Text className="fw-light lh-1">{service.description}</Card.Text>
+                <Card.Text className="fw-light lh-1">
+                  {service.description}
+                </Card.Text>
 
-            <Card.Text className="fw-600 text-success">
-              ${service.price}
-              {service.name === "Greca" && (
-                <span
-                  className="text-muted fst-italic d-block"
-                  style={{ fontSize: "0.85rem" }}
-                >
-                  *Este precio puede aumentar dependiendo el diseño.
-                </span>
-              )}
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      );
-    })}
-  </>
-);
+                <Card.Text className="fw-600 text-success">
+                  ${service.price}
+                  {service.name === "Greca" && (
+                    <span
+                      className="text-muted fst-italic d-block"
+                      style={{ fontSize: "0.85rem" }}
+                    >
+                      *Este precio puede aumentar dependiendo el diseño.
+                    </span>
+                  )}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        );
+      })}
+    </>
+  );
 };

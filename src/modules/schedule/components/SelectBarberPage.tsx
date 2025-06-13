@@ -1,26 +1,39 @@
-import {  useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { CardBarber } from "./CardBarber";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import { motion } from "framer-motion";
 import { DataContext } from "../../../general/contexts/DataContext/DataContext";
+import { StyledBackButton } from "../../../general/components/StyledBackButton";
 
 export const SelectBarberPage = () => {
   const navigate = useNavigate();
-  const { setCurrentStep,citaData } = useContext(CitasFormContext);
-  const {workers,fetchWorkersByBranch} = useContext(DataContext);
+  const { setCurrentStep, citaData } = useContext(CitasFormContext);
+  const { workers, fetchWorkersByBranch } = useContext(DataContext);
 
   const handleGoBack = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
+    setCurrentStep((prevStep) => prevStep);
     navigate("/agendar/branch");
   };
-  
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-  fetchWorkersByBranch(citaData.branchId);
-}, []);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        await fetchWorkersByBranch(citaData.branchId);
+      } catch (error) {
+        console.error("Error al obtener barberos", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <motion.div
@@ -32,21 +45,34 @@ export const SelectBarberPage = () => {
         duration: 0.6,
         ease: "easeOut",
       }}
-      
     >
       <h5>Seleccionar barbero</h5>
       <div className="d-flex flex-column flex-lg-row">
-        <CardBarber barbers={workers} />
+        {loading ? (
+          <div className="d-flex justify-content-center mt-4">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Cargando...</span>
+            </Spinner>
+          </div>
+        ) : workers.length > 0 ? (
+          <CardBarber barbers={workers} />
+        ) : (
+          <div className="alert alert-info mt-3" role="alert">
+            No hay barberos disponibles
+          </div>
+        )}
       </div>
-      <StyledButton
+      <StyledBackButton
         className="mt-3"
         as={Button}
+        size="sm"
         onClick={() => {
           handleGoBack();
         }}
       >
+        <i className="bi bi-arrow-left-circle me-2"></i>
         Regresar
-      </StyledButton>
+      </StyledBackButton>
     </motion.div>
   );
 };

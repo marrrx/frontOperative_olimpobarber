@@ -19,7 +19,7 @@ export const CardBarber: React.FC<CardBarberProps> = ({ barbers }) => {
 
   const handleSelectBarber = ({ barber }: any) => {
     updateCitaData({ workerId: barber.userId });
-    setCurrentStep((prevStep) => prevStep + 1);
+    setCurrentStep((prevStep) => prevStep);
     navigate("/agendar/service");
     setSelectedWorker(barber);
   };

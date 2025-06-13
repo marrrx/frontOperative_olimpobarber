@@ -111,7 +111,6 @@ export const PageHome = () => {
           >
             {services
               .filter((service) => ![2, 3, 6].includes(service.id)) // excluir ID 3 y 5
-              .slice(0, showMore ? 4 : 2)
               .map((service, index) => (
                 <Col
                   sm={12}
@@ -159,12 +158,7 @@ export const PageHome = () => {
                 </Col>
               ))}
 
-            <StyledButton
-              className="w-50"
-              onClick={() => setShowMore(!showMore)}
-            >
-              {showMore ? "Ver menos" : "Ver más"}
-            </StyledButton>
+         
           </Row>
         </Container>
       </div>

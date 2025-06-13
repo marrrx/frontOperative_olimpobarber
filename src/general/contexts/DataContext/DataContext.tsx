@@ -33,6 +33,7 @@ export const DataContext = createContext<IDataContextProps>({
   fetchAvailableTimes: async () => {},
   createAppointment: async () => {},
   fetchAppointments: async () => {},
+  fetchAppointmentsByPhone: async () => {},
 });
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -43,12 +44,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [workers, setWorkers] = useState<IWorker[]>([]);
   const [availableTimes, setAvailableTimes] = useState<string[]>([]);
   const [selectedWorker, setSelectedWorker] = useState<IWorker>({} as IWorker);
-  const [appointments, setAppointments]= useState<IAppointment[]>([]);
-
-
+  const [appointments, setAppointments] = useState<IAppointment[]>([]);
 
   const [createdAppointmentId, setCreatedAppointmentId] = useState<number>(0);
-  
 
   const fetchBranches = async () => {
     try {
@@ -124,10 +122,23 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   const fetchAppointments = async () => {
     try {
       const response = await appointmentService.getVariousAppointments();
-      console.log(response.data);
       setAppointments(response.data);
     } catch (error) {
       console.error("Error al obtener citas:", error);
+    }
+  };
+
+  const fetchAppointmentsByPhone = async (phone: string) => {
+    try {
+      const response = await appointmentService.getAppointmentsByPhoneNumber(
+        phone
+      );
+      setAppointments(response.data);
+      const ids = appointments.map((appointment) => appointment.id);
+      localStorage.setItem("appointments", JSON.stringify(ids));
+    } catch (error) {
+      console.error("Error al obtener citas:", error);
+      setAppointments([]);
     }
   };
 
@@ -152,7 +163,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         setSelectedWorker,
         createAppointment,
         fetchAppointments,
-        appointments
+        appointments,
+        fetchAppointmentsByPhone,
       }}
     >
       {children}

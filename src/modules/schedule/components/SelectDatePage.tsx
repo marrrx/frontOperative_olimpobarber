@@ -2,15 +2,19 @@ import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { StyledBackButton } from "../../../general/components/StyledBackButton";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import { DataContext } from "../../../general/contexts/DataContext/DataContext";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 export const SelectDatePage = () => {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
+
   const { setCurrentStep, updateCitaData, citaData, totalTemp } =
     useContext(CitasFormContext);
   const { fetchAvailableTimes, availableTimes, selectedWorker } =
@@ -102,29 +106,38 @@ export const SelectDatePage = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-row justify-content-between align-items-center ">
-          <StyledButton
-            as={Button}
-            className="mt-3"
-            onClick={() => {
-              handleGoBack();
-            }}
-          >
-            Regresar
-          </StyledButton>
+        <Row
+          className={`${
+            isMobile
+              ? "justify-content-center mt-5 gx-2"
+              : "justify-content-start mt-5"
+          }`}
+        >
+          <Col xs="auto">
+            <p className="fw-bold text-center text-md-start mb-0">
+              Total: ${totalTemp}
+            </p>
+          </Col>
+        </Row>
+        <Row
+          className={`${
+            isMobile ? "justify-content-center" : "justify-content-start"
+          } mt-3`}
+        >
+          <Col xs="auto">
+            <div className="d-flex gap-2">
+              <StyledBackButton as={Button} onClick={handleGoBack} size="sm">
+                <i className="bi bi-arrow-left-circle me-2"></i>
+                Regresar
+              </StyledBackButton>
 
-          <p className="fw-bold">Total: ${totalTemp}</p>
-
-          <StyledButton
-            as={Button}
-            className="mt-3"
-            onClick={() => {
-              handleNext();
-            }}
-          >
-            Siguiente
-          </StyledButton>
-        </div>
+              <StyledButton as={Button} onClick={handleNext} size="sm">
+                <i className="bi bi-arrow-right-circle me-2"></i>
+                Siguiente
+              </StyledButton>
+            </div>
+          </Col>
+        </Row>
       </motion.div>
     </>
   );

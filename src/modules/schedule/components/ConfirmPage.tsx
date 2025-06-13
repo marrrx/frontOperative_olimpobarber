@@ -29,6 +29,7 @@ export const ConfirmPage = () => {
   const createAppoinmentDTO: ICreateAppointmentDTO = {
     clientName: citaData.client.name,
     clientLastName: citaData.client.apellido,
+    clientPhoneNumber: citaData.client.telefono,
     branchId: citaData.branchId,
     workerId: citaData.workerId,
     date: citaData.date,
@@ -83,7 +84,7 @@ export const ConfirmPage = () => {
       <div className="d-flex flex-column">
         <p>
           {citaData.client.name + ` ` + citaData.client.apellido}, su cita será
-          el día {dayjs(citaData.date).format("dddd DD [de] MMMM")} a las {citaData.time}, con un precio total de ${totalTemp}.
+          el día {dayjs(citaData.date).format("dddd DD [de] MMMM")} a las {citaData.time}, con un precio total de <strong>${totalTemp}</strong>.
         </p>
         <p>
           Si los datos son correctos, es necesario pagar el 50% del precio total
@@ -103,14 +104,7 @@ export const ConfirmPage = () => {
             <h6 className="mb-0 fst-italic">Monto 50%:</h6>
             <strong>${Math.round(totalTemp / 2)}</strong>
           </div>
-          <div className="ms-0 ms-lg-5  mt-3 mt-lg-0">
-            <Button
-              className="btn-success"
-              href="https://api.whatsapp.com/send/?phone=4498059894&text"
-            >
-              Whatsapp
-            </Button>
-          </div>
+      
         </div>
       </div>
       <div className="d-flex flex-row justify-content-between align-items-center mt-5">

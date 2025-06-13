@@ -5,9 +5,7 @@ import "../styles/styles.css";
 export const StepsBar = () => {
   const steps: string[] = [
     "Insertar datos",
-    "Seleccionar sucursal",
-    "Seleccionar barbero",
-    "Seleccionar servicios",
+    "Configurar cita",
     "Seleccionar fecha",
     "Confirmar",
   ];

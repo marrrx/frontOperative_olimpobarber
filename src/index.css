@@ -21,6 +21,17 @@ code {
 .responsive-text {
   font-size: 1rem; 
 }
+/* index.css o layout.css */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-content {
+  flex: 1;
+}
+
 
 @media (max-width: 576px) {
   .responsive-text {

@@ -10,10 +10,10 @@ import "./styles/styles.css";
 const stepMapping: { [key: string]: number } = {
   "/agendar": 1,
   "/agendar/branch": 2,
-  "/agendar/barber": 3,
-  "/agendar/service": 4,
-  "/agendar/date": 5,
-  "/agendar/confirm": 6,
+  "/agendar/barber": 2,
+  "/agendar/service": 2,
+  "/agendar/date": 3,
+  "/agendar/confirm": 4,
 };
 
 export const PageSchedule = () => {
@@ -44,7 +44,7 @@ export const PageSchedule = () => {
 
   return (
     <Container
-      fluid
+      fluid 
     >
       <ToastContainer
         position="top-right"

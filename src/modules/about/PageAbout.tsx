@@ -16,7 +16,7 @@ export const PageAbout = () => {
   ];
   return (
     <>
-      <Container className="d-flex flex-column justify-content-center align-items-center mt-5">
+      <Container className="d-flex flex-column justify-content-center align-items-center mt-4">
         <Row className="w-100">
           <Col lg={8}>
             <h1 className="fw-bolder  text-lg-start mb-4">¿Quiénes somos?</h1>
