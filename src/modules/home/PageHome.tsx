@@ -36,7 +36,7 @@ export const PageHome = () => {
     },
   ];
 
-  const [hovered, setHovered] = useState<number|boolean|null>(false);
+  const [hovered, setHovered] = useState<number | boolean | null>(false);
 
   return (
     <>
@@ -110,7 +110,7 @@ export const PageHome = () => {
             className="g-5 justify-content-center mb-5 w-100"
           >
             {services
-              .filter((service) => ![2, 3, 6].includes(service.id)) // excluir ID 3 y 5
+              .filter((service) => !["Corte de niño", "Corte de adulto mayor","Vaporizador en barba"].includes(service.name))
               .map((service, index) => (
                 <Col
                   sm={12}
@@ -143,7 +143,7 @@ export const PageHome = () => {
                             ? "linear-gradient(to bottom, rgba(0,0,0,1) 100%, rgba(0,0,0,0) 100%)"
                             : "linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)",
                       }}
-                      transition={{ duration: 0.4, ease:"easeInOut"}}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
                     />
                     <Card.Body className="position-absolute bottom-0 start-0 w-100 bg-dark bg-opacity-50 text-white text-center py-2">
                       <h5 className="fw-bold">{service.name}</h5>
@@ -157,8 +157,6 @@ export const PageHome = () => {
                   </Card>
                 </Col>
               ))}
-
-         
           </Row>
         </Container>
       </div>

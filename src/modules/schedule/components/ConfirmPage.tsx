@@ -1,13 +1,15 @@
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import { DataContext } from "../../../general/contexts/DataContext/DataContext";
 import { ICreateAppointmentDTO } from "../../../general/contexts/DataContext/interfaces/ICreateAppointmentDTO";
 import Swal from "sweetalert2";
+import { StyledBackButton } from "../../../general/components/StyledBackButton";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 export const ConfirmPage = () => {
   const {
@@ -69,6 +71,7 @@ export const ConfirmPage = () => {
     }
   };
 
+  const isMobile = useIsMobile();
   return (
     <motion.div
       className="mx-3 mt-4"
@@ -84,7 +87,8 @@ export const ConfirmPage = () => {
       <div className="d-flex flex-column">
         <p>
           {citaData.client.name + ` ` + citaData.client.apellido}, su cita será
-          el día {dayjs(citaData.date).format("dddd DD [de] MMMM")} a las {citaData.time}, con un precio total de <strong>${totalTemp}</strong>.
+          el día {dayjs(citaData.date).format("dddd DD [de] MMMM")} a las{" "}
+          {citaData.time}, con un precio total de <strong>${totalTemp}</strong>.
         </p>
         <p>
           Si los datos son correctos, es necesario pagar el 50% del precio total
@@ -104,30 +108,34 @@ export const ConfirmPage = () => {
             <h6 className="mb-0 fst-italic">Monto 50%:</h6>
             <strong>${Math.round(totalTemp / 2)}</strong>
           </div>
-      
         </div>
       </div>
-      <div className="d-flex flex-row justify-content-between align-items-center mt-5">
-        <StyledButton
-          as={Button}
-          className="mt-3"
-          onClick={() => {
-            handleGoBack();
-          }}
-        >
-          Regresar
-        </StyledButton>
 
-        <StyledButton
-          as={Button}
-          className="mt-3"
-          onClick={() => {
-            confirm();
-          }}
-        >
-          Finalizar
-        </StyledButton>
-      </div>
+      <Row
+        className={`${
+          isMobile ? "justify-content-center" : "justify-content-start"
+        } mt-3`}
+      >
+        <Col xs="auto">
+          <div className="d-flex gap-2">
+            <StyledBackButton as={Button} onClick={handleGoBack} size="sm">
+              <i className="bi bi-arrow-left-circle me-2"></i>
+              Regresar
+            </StyledBackButton>
+
+            <StyledButton
+              as={Button}
+              onClick={() => {
+                confirm();
+              }}
+              size="sm"
+            >
+              <i className="bi bi-arrow-right-circle me-2"></i>
+              Finalizar
+            </StyledButton>
+          </div>
+        </Col>
+      </Row>
     </motion.div>
   );
 };
