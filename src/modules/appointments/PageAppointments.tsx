@@ -71,7 +71,7 @@ export const PageAppointments = () => {
   const [expandedSections, setExpandedSections] = useState<any>({
     pendientes: true,
     canceladas: false,
-    completadas: false,
+    confirmadas: false,
     expiradas: false,
     recuperar: false,
   });
@@ -193,7 +193,7 @@ export const PageAppointments = () => {
           >
             {expiredAppointments.length === 0 ? (
               <div className="alert alert-info mt-3" role="alert">
-                No hay citas canceladas
+                No hay citas expiradas
               </div>
             ) : (
               expiredAppointments.map((appointment, index) => (

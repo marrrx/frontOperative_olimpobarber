@@ -115,12 +115,12 @@ export const PageHome = () => {
                 <Col
                   sm={12}
                   md={6}
-                  lg={6}
+                  lg={5}
                   className="d-flex justify-content-center"
                   key={index}
                 >
                   <Card
-                    className="h-100 w-75  position-relative overflow-hidden"
+                    className="h-100 w-100  position-relative overflow-hidden"
                     as={motion.div}
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
