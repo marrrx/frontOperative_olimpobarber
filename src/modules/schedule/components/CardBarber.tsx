@@ -55,6 +55,7 @@ export const CardBarber: React.FC<CardBarberProps> = ({ barbers }) => {
             {!isMobile && (
               <StyledButton
                 as={Button}
+                size="sm"
                 className={"btn-sm mt-2"}
                 onClick={() => {
                   handleSelectBarber({ barber });

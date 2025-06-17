@@ -35,7 +35,6 @@ export const PageSchedule = () => {
 
   useEffect(() => {
     const lastPath = sessionStorage.getItem("lastPath");
-    setTotalTemp(Number(sessionStorage.getItem("totalTemp")))
     if (lastPath) {
       navigate(lastPath, { replace: true });
     }
@@ -46,17 +45,6 @@ export const PageSchedule = () => {
     <Container
       fluid 
     >
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={true}
-        rtl={false}
-        draggable
-        pauseOnHover={false}
-        theme="light"
-      />
       <div className="card overflow-hidden bg-white rounded-2 mt-2 p-md-5">
         <div>
           <h2>Agenda tu visita</h2>

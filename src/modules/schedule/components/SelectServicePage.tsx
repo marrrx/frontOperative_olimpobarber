@@ -38,6 +38,7 @@ export const SelectServicePage = () => {
 
       updateCitaData({
         services: selectedServices,
+        total: totalTemp,
       });
 
       setCurrentStep((prev) => prev + 1);

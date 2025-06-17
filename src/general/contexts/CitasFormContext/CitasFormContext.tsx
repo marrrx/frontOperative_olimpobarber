@@ -8,7 +8,7 @@ export const CitasFormContext = createContext<CitasFormContextProps>({
   currentStep: 1,
   setCurrentStep: () => {},
   citaData: {
-    client: { name: "", apellido: "", fecha_nacimiento: "",telefono:"" },
+    client: { name: "", apellido: "", fecha_nacimiento: "", telefono: "" },
     branchId: 0,
     workerId: 0,
     date: "",
@@ -66,7 +66,7 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const clearCitaData = () => {
     setCitaData({
-      client: { name: "", apellido: "", fecha_nacimiento: "",telefono:"" },
+      client: { name: "", apellido: "", fecha_nacimiento: "", telefono: "" },
       branchId: 0,
       workerId: 0,
       date: "",
@@ -77,7 +77,6 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
     sessionStorage.removeItem("citaData");
     sessionStorage.removeItem("currentStep");
     sessionStorage.removeItem("lastPath");
-    sessionStorage.removeItem("totalTemp");
   };
 
   const calcularEdad = (fechaNacimiento: string): number => {
@@ -95,6 +94,8 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
   );
   const [totalTemp, setTotalTemp] = useState(citaData.total);
 
+
+  
   return (
     <CitasFormContext.Provider
       value={{
