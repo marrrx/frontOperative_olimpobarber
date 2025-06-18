@@ -129,18 +129,17 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const fetchAppointmentsByPhone = async (phone: string) => {
-    try {
-      const response = await appointmentService.getAppointmentsByPhoneNumber(
-        phone
-      );
-      setAppointments(response.data);
-      const ids = appointments.map((appointment) => appointment.id);
-      localStorage.setItem("appointments", JSON.stringify(ids));
-    } catch (error) {
-      console.error("Error al obtener citas:", error);
-      setAppointments([]);
-    }
-  };
+  try {
+    const response = await appointmentService.getAppointmentsByPhoneNumber(phone);
+    setAppointments(response.data);
+    const ids = response.data.map((appointment: { id: any; }) => appointment.id); 
+    localStorage.setItem("appointments", JSON.stringify(ids));
+  } catch (error) {
+    console.error("Error al obtener citas:", error);
+    setAppointments([]);
+  }
+};
+
 
   useEffect(() => {
     fetchBranches();
