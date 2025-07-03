@@ -18,6 +18,7 @@ export const ConfirmPage = () => {
     clearCitaData,
     setSelectedServices,
     totalTemp,
+    setTotalTemp
   } = useContext(CitasFormContext);
   const { createAppointment } = useContext(DataContext);
   const navigate = useNavigate();
@@ -55,6 +56,7 @@ export const ConfirmPage = () => {
         clearCitaData();
         setSelectedServices([]);
         setCurrentStep(1);
+        setTotalTemp(0);
         navigate("/citas");
         Swal.fire(
           "¡Cita creada!",

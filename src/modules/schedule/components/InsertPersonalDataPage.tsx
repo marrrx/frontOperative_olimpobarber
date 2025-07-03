@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -15,6 +16,8 @@ import { CitasFormContext } from "../../../general/contexts/CitasFormContext/Cit
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { useIsMobile } from "../../../hooks/useIsMobile";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/material.css";
 
 export const InsertPersonalDataPage = () => {
   const navigate = useNavigate();
@@ -70,28 +73,29 @@ export const InsertPersonalDataPage = () => {
             })
           }
         />
-        <TextField
-          label="Número de celular"
-          className="ms-lg-3 mt-3 mt-lg-0"
-          type="tel"
-          value={citaData.client.telefono}
-          error={telefonoError}
-          helperText={telefonoError ? "El número debe tener 10 dígitos" : ""}
-          onChange={(e) => {
-            const value = e.target.value;
-
-            // Solo permitir números
-            if (!/^\d*$/.test(value)) return;
-
-            updateCitaData({
-              client: { ...citaData.client, telefono: value },
-            });
-
-            // Validar si tiene 10 dígitos
-            setTelefonoError(value.length !== 10);
-          }}
-          inputProps={{ maxLength: 10 }}
-        />
+        <FormControl
+          error={telefonoError} 
+          className="ms-lg-3 mt-3 mt-lg-0" 
+        >
+          <PhoneInput
+            country="mx"
+            value={citaData.client.telefono}
+            specialLabel="Telefono" 
+            onChange={(value) => {
+              updateCitaData({
+                client: { ...citaData.client, telefono: value },
+              });
+              const localPart = value.startsWith("52") ? value.slice(2) : value;
+              setTelefonoError(localPart.length !== 10);
+            }}
+            containerStyle={{ width: "100%" }} 
+            inputStyle={{ width: "100%", height: 56 }} 
+            inputClass={telefonoError ? "Mui-error" : ""} 
+          />
+          {telefonoError && (
+            <FormHelperText>El número debe tener 10 dígitos</FormHelperText>
+          )}
+        </FormControl>
         <FormControl
           sx={{
             minWidth: 120,

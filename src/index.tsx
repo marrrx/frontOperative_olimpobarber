@@ -9,7 +9,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import "dayjs/locale/es"; 
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { DataProvider } from "./general/contexts/DataContext/DataContext";
-
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 
 const root = ReactDOM.createRoot(
