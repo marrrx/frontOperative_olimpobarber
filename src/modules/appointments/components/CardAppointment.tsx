@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { formatDate } from "../../../general/utils/Dates";
+import { formatDate, to12hCompact } from "../../../general/utils/Dates";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -63,7 +63,7 @@ export const CardAppointment: React.FC<props> = ({
         <div className="card-text mt-2 fw-light lh-1">
           <b className="fw-bold">Fecha:</b> {formatDate(appointment.date)}
           <br />
-          <b className="fw-bold">Hora:</b> {appointment.time}
+          <b className="fw-bold">Hora:</b> {to12hCompact(appointment.time)}
           <br />
           <AnimatePresence>
             {expanded && (

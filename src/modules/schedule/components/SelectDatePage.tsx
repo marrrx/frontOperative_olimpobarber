@@ -10,6 +10,7 @@ import { StyledButton } from "../../../general/components/StyledButton";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
 import { DataContext } from "../../../general/contexts/DataContext/DataContext";
 import { useIsMobile } from "../../../hooks/useIsMobile";
+import { to12hCompact } from "../../../general/utils/Dates";
 
 export const SelectDatePage = () => {
   const navigate = useNavigate();
@@ -99,7 +100,7 @@ export const SelectDatePage = () => {
                     className="btn btn-outline-primary m-3"
                     htmlFor={`hora-${i}`}
                   >
-                    {hora}
+                    {to12hCompact(hora)}
                   </label>
                 </>
               ))}

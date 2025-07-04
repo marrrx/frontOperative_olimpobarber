@@ -94,7 +94,7 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
   );
   const [totalTemp, setTotalTemp] = useState(citaData.total);
 
-  
+  console.log(citaData)
   return (
     <CitasFormContext.Provider
       value={{

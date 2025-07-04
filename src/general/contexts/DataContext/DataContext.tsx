@@ -107,6 +107,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
         timeSlots: [],
       });
     } catch (error) {
+      throw error;
       console.error("Error al crear la cita:", error);
     }
   };

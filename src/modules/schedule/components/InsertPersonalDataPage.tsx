@@ -80,7 +80,7 @@ export const InsertPersonalDataPage = () => {
           <PhoneInput
             country="mx"
             value={citaData.client.telefono}
-            specialLabel="Telefono" 
+            specialLabel="Teléfono" 
             onChange={(value) => {
               updateCitaData({
                 client: { ...citaData.client, telefono: value },

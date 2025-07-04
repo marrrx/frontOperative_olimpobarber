@@ -47,7 +47,7 @@ export const SelectServicePage = () => {
       toast.error("Debes seleccionar al menos un servicio");
     }
   };
-
+console.log(services)
   return (
     <>
       <motion.div

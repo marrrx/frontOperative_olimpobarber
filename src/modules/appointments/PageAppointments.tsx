@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { CardAppointment } from "./components/CardAppointment";
 import { Expand } from "./components/Expand";
 import TextField from "@mui/material/TextField";
+import PhoneInput from "react-phone-input-2";
 
 export const CountdownTimer = ({ expiresAt }: { expiresAt: string }) => {
   const calculateTimeLeft = () => {
@@ -219,15 +220,15 @@ export const PageAppointments = () => {
               Ingresa tu número telefónico para recuperar tus citas.
             </p>
             <div className="d-flex justify-content-center">
-              <TextField
-                fullWidth
-                id="outlined-basic"
-                label="Numero de celular"
-                variant="outlined"
+              <PhoneInput
+                country={"mx"}
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                size="small"
+                inputStyle={{width:"100%"}}
+                specialLabel="Teléfono"
+                onChange={(e) => setPhone(e)}
               />
+
+           
               <Button
                 size="sm"
                 className="ms-2"

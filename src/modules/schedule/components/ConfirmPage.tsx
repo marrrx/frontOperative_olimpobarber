@@ -10,6 +10,7 @@ import { ICreateAppointmentDTO } from "../../../general/contexts/DataContext/int
 import Swal from "sweetalert2";
 import { StyledBackButton } from "../../../general/components/StyledBackButton";
 import { useIsMobile } from "../../../hooks/useIsMobile";
+import { to12hCompact } from "../../../general/utils/Dates";
 
 export const ConfirmPage = () => {
   const {
@@ -62,7 +63,7 @@ export const ConfirmPage = () => {
           "¡Cita creada!",
           "Recuerda enviar tu comprobante de pago.",
           "success"
-        );
+        )
       } catch (error) {
         Swal.fire(
           "Error",
@@ -90,7 +91,7 @@ export const ConfirmPage = () => {
         <p>
           {citaData.client.name + ` ` + citaData.client.apellido}, su cita será
           el día {dayjs(citaData.date).format("dddd DD [de] MMMM")} a las{" "}
-          {citaData.time}, con un precio total de <strong>${totalTemp}</strong>.
+          {to12hCompact(citaData.time)}, con un precio total de <strong>${totalTemp}</strong>.
         </p>
         <p>
           Si los datos son correctos, es necesario pagar el 50% del precio total
