@@ -66,7 +66,7 @@ export const SelectDatePage = () => {
                   updateCitaData({
                     date: formattedDate,
                   });
-                  fetchAvailableTimes(citaData.workerId, newValue);
+                  fetchAvailableTimes(citaData.workerId, [newValue]);
                 }
               }}
               shouldDisableDate={disableDayOff}

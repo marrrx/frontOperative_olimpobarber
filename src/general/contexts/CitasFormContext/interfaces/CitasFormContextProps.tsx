@@ -10,6 +10,8 @@ export interface CitasFormContextProps {
   clearCitaData: () => void;
   selectedServices: number[];
   setSelectedServices: React.Dispatch<SetStateAction<number[]>>;
+  selectedBranch: number | null;
+  setSelectedBranch: React.Dispatch<SetStateAction<number | null>>;
   totalTemp: number;
   setTotalTemp: React.Dispatch<SetStateAction<number>>;
 }

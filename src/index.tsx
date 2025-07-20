@@ -6,14 +6,21 @@ import { App } from "./App";
 import { CitasFormProvider } from "./general/contexts/CitasFormContext/CitasFormContext";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import "dayjs/locale/es"; 
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { DataProvider } from "./general/contexts/DataContext/DataContext";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import localeData from 'dayjs/plugin/localeData';
+import "dayjs/locale/es"; 
+import "./modules/schedule/styles/styles.css";
+
+
+
+dayjs.extend(localeData);
 dayjs.extend(utc);
 dayjs.extend(timezone);
+dayjs.locale('es'); 
 
 
 const root = ReactDOM.createRoot(

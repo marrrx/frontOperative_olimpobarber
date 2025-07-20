@@ -16,7 +16,7 @@ export interface IDataContextProps{
     fetchWorkersByBranch:(branchId:number)=>Promise<void>
     availableTimes:string[]
     setAvailableTimes:React.Dispatch<React.SetStateAction<string[]>>
-    fetchAvailableTimes:(workerId:number,date:Dayjs)=>Promise<void>
+    fetchAvailableTimes:(workerId:number,dates:Dayjs[])=>Promise<void>
     createAppointment:(appointmentData:ICreateAppointmentDTO)=>Promise<void>
     fetchAppointments:()=>Promise<void>,
     fetchAppointmentsByPhone:(phone:string)=>Promise<void>,

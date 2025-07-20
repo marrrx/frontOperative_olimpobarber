@@ -21,6 +21,8 @@ export const CitasFormContext = createContext<CitasFormContextProps>({
   clearCitaData: () => {},
   selectedServices: [],
   setSelectedServices: () => {},
+  selectedBranch: null,
+  setSelectedBranch: () => {},
   totalTemp: 0,
   setTotalTemp: () => {},
 });
@@ -92,6 +94,7 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
   const [selectedServices, setSelectedServices] = useState<number[]>(
     citaData.services
   );
+  const [selectedBranch, setSelectedBranch] = useState<number | null>(null);
   const [totalTemp, setTotalTemp] = useState(citaData.total);
 
   console.log(citaData)
@@ -108,6 +111,8 @@ export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
         setSelectedServices,
         totalTemp,
         setTotalTemp,
+        selectedBranch,
+        setSelectedBranch,
       }}
     >
       {children}

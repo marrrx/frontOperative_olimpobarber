@@ -91,7 +91,7 @@ export const CardAppointment: React.FC<props> = ({
                       <div className="mb-0">
                         <Button
                           className="btn-success"
-                          href="https://api.whatsapp.com/send/?phone=4498059894&text"
+                          href="https://api.whatsapp.com/send/?phone=3344118749&text"
                         >
                           <i className="bi bi-whatsapp"></i>{" "}
                         </Button>

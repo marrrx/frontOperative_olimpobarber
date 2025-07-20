@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import PageNewSchedule from "../newSchedule/PageNewSchedule";
 import { ConfirmPage } from "./components/ConfirmPage";
 import { InsertPersonalDataPage } from "./components/InsertPersonalDataPage";
 import { SelectBarberPage } from "./components/SelectBarberPage";
@@ -30,7 +31,7 @@ export const RoutesSchedule = () => {
   return (
     <Routes>
       <Route path="/citas" element={<RedirectToLastStep />} />
-      <Route path="/*" element={<PageSchedule />}>
+      <Route path="/*" element={<PageNewSchedule />}>
         <Route index element={<InsertPersonalDataPage />} />
         <Route element={<ProtectedRoute requiredStep="insert-data" />}>
           <Route path="branch" element={<SelectBranchPage />} />

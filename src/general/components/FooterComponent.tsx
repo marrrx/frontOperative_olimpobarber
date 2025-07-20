@@ -48,7 +48,7 @@ export const FooterComponent = () => {
                 <div className="col-12 col-md-4">
                   <h5 className="text-warning">Contacto</h5>
                   <p className="small mb-1">
-                    <i className="bi bi-telephone me-2"></i>+52 449 805 9894
+                    <i className="bi bi-telephone me-2"></i>+52 33 4411 8749
                   </p>
                   <p className="small mb-1">
                     <i className="bi bi-facebook me-2"></i>

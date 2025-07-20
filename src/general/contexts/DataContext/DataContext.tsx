@@ -18,7 +18,7 @@ export const DataContext = createContext<IDataContextProps>({
   workers: [],
   appointments: [],
   selectedWorker: {
-    id: 0,
+    userId: 0,
     name: "",
     dayOff: 0,
     imageBase64: "",
@@ -71,18 +71,17 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await workerService.getWorkersByBranch<IWorker[]>(
         branchId
       );
-      console.log(response.data);
       setWorkers(response.data);
     } catch (error) {
       setWorkers([]);
-      console.error("Error al obtener workers:", error);
+      throw error;
     }
   };
-  const fetchAvailableTimes = async (workerId: number, date: Dayjs) => {
+  const fetchAvailableTimes = async (workerId: number, dates: Dayjs[]) => {
     try {
       const response = await availabilityService.getHoursAvailable<string[]>(
         workerId,
-        date
+        dates
       );
       setAvailableTimes(response.data);
     } catch (error) {
@@ -100,7 +99,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({
       setCreatedAppointmentId(response.data.id);
       setAvailableTimes([]);
       setSelectedWorker({
-        id: 0,
+        userId: 0,
         name: "",
         dayOff: 0,
         imageBase64: "",

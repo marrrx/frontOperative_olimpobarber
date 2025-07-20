@@ -1,7 +1,7 @@
 import { ITimeSlot } from "./ITimeSlot";
 
 export interface IWorker {
-    id: number;
+    userId: number;
     name: string;
     dayOff:number;
     imageBase64: string;

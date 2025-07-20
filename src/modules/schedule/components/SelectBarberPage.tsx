@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-
 import { CardBarber } from "./CardBarber";
-import { StyledButton } from "../../../general/components/StyledButton";
 import { useNavigate } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 import { CitasFormContext } from "../../../general/contexts/CitasFormContext/CitasFormContext";
