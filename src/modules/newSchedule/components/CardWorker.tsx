@@ -13,7 +13,7 @@ interface CardWorkerProps {
 
 export const CardWorker: React.FC<CardWorkerProps> = ({ barbers, loading }) => {
   const navigate = useNavigate();
-  const {    updateCitaData, selectedBranch, citaData } =
+  const { updateCitaData, selectedBranch, citaData } =
     useContext(CitasFormContext);
   const { setSelectedWorker, selectedWorker } = useContext(DataContext);
   const isMobile = useIsMobile();
@@ -25,18 +25,17 @@ export const CardWorker: React.FC<CardWorkerProps> = ({ barbers, loading }) => {
   };
 
   if (loading) {
-  return (
-    <div
-      className="d-flex justify-content-center align-items-center"
-      style={{ minHeight: 150 }}
-    >
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Cargando...</span>
-      </Spinner>
-    </div>
-  );
-}
-
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: 150 }}
+      >
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </Spinner>
+      </div>
+    );
+  }
 
   if (barbers.length === 0) {
     return (
@@ -52,30 +51,40 @@ export const CardWorker: React.FC<CardWorkerProps> = ({ barbers, loading }) => {
         const isSelected = selectedWorker?.userId === barber.userId;
         return (
           <Card
-            className={`d-flex flex-row shadow-sm border  ${
-              isSelected ? "border-success border-1" : ""
+            className={`d-flex flex-row flex-sm-column flex-md-row align-items-center shadow-sm border mb-md-2 ${
+              isSelected ? "border-success border-2" : ""
             }`}
             key={index}
-            onClick={
-              isMobile ? () => handleSelectBarber({ barber }) : undefined
-            }
-            style={{ cursor: "pointer", height: "80px" }}
+            onClick={() => handleSelectBarber({ barber })}
+            style={{ cursor: "pointer", minHeight: "80px" }}
           >
-            <div className="d-flexalign-items-center justify-content-center p-1">
+            <div className="p-2 d-flex justify-content-center align-items-center">
               <Card.Img
-                className="fir-image-figure fir-clickcircle"
+                className="rounded-circle"
                 src={barber.imageBase64}
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  objectFit: "cover",
+                }}
               />
             </div>
-            <Card.Body className="w-100 ">
-              <Card.Title className="fw-bold fs-6">{barber.name}</Card.Title>
-              {barber.timeSlots.map((slot, index) => {
-                return (
-                  <Card.Text key={index} className="mb-0 w-100 responsive-text">
+
+            <Card.Body className="w-100 text-center text-sm-start px-2">
+              <Card.Title className="fw-bold fs-6 mb-1">
+                {barber.name}
+              </Card.Title>
+              <div className="d-flex flex-wrap justify-content-center justify-content-sm-start">
+                {barber.timeSlots.map((slot, i) => (
+                  <Card.Text
+                    key={i}
+                    className="mb-0 me-2 small text-nowrap"
+                    style={{ fontSize: "0.85rem" }}
+                  >
                     {slot.startTime} - {slot.endTime}
                   </Card.Text>
-                );
-              })}
+                ))}
+              </div>
             </Card.Body>
           </Card>
         );

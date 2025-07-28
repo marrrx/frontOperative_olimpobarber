@@ -8,8 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { Container } from "react-bootstrap";
+import { useFormContext } from "react-hook-form";
 import { IWorker } from "../../../general/contexts/DataContext/interfaces/IWorker";
-import { CardBarber } from "../../schedule/components/CardBarber";
 import { CardWorker } from "./CardWorker";
 
 interface SelectBarberProps {
@@ -18,7 +19,6 @@ interface SelectBarberProps {
   readyBranches: Record<number, boolean>;
   workersByBranch: Record<number, IWorker[]>;
   handleAccordionClick: (branchId: number) => void;
-  isMobile: boolean;
   loading?: boolean;
   loadingBranchId?: number | null;
 }
@@ -29,11 +29,12 @@ export const SelectBarber: React.FC<SelectBarberProps> = ({
   readyBranches,
   workersByBranch,
   handleAccordionClick,
-  isMobile,
   loading,
   loadingBranchId,
 }) => {
+
   return (
+    <Container>
     <List component="nav" className="barbers-container">
       {branches.map((branch) => {
         const isOpen = activeAccordion === branch.id.toString();
@@ -58,23 +59,19 @@ export const SelectBarber: React.FC<SelectBarberProps> = ({
               collapsedSize={0}
               unmountOnExit
             >
-              <Box sx={{ p: 2 }}>
-                {isMobile ? (
+              <Box sx={{ p: 2 }} >
+            
                   <CardWorker
                     barbers={workersByBranch[branch.id] ?? []}
                     loading={loading && loadingBranchId === branch.id}
                   />
-                ) : (
-                  <CardBarber
-                    barbers={workersByBranch[branch.id] ?? []}
-                    loading={loading && loadingBranchId === branch.id}
-                  />
-                )}
+             
               </Box>
             </Collapse>
           </Box>
         );
       })}
     </List>
+    </Container>
   );
 };

@@ -25,9 +25,11 @@ export const CitasFormContext = createContext<CitasFormContextProps>({
   setSelectedBranch: () => {},
   totalTemp: 0,
   setTotalTemp: () => {},
+  
 });
 
 export const CitasFormProvider: React.FC<ProviderProps> = ({ children }) => {
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [currentStep, setCurrentStep] = useState<number>(() => {
     return Number(sessionStorage.getItem("currentStep")) || 1;
   });
